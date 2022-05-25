@@ -18,6 +18,7 @@ class CreateAccountTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('password_level_2')->nullable();
             $table->string('user_token')->nullable();
             $table->string('register_token')->nullable();
             $table->string('status',32)->default('deactive');

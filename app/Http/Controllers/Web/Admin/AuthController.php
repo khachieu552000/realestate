@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Str;
 use Socialite;
 use App\Models\AccSocial;
+use Illuminate\Support\Facades\Session;
 
 
 class AuthController extends Controller
@@ -86,26 +87,10 @@ class AuthController extends Controller
         $users = Socialite::driver('google')->stateless()->user();
         $authUser = $this->findOrCreateUser($users, 'google');
         if($authUser){
-            $account_name = Account::with('user_info')->where('id', $authUser->user_id)->first();
-            // dd($account_name->email);
-            Session::put('user_name', $account_name->user_info->name);
-            Session::put('phone', $account_name->user_info->phone);
-            Session::put('email', $account_name->email);
-            Session::put('address', $account_name->user_info->address);
-            Session::put('date', $account_name->user_info->birthday);
-            Session::put('login', true);
-            Session::put('id', $account_name->id);
+            $this->sessionProfile($authUser);
         }
         elseif($account_user_new){
-            $account_name = User::with('user_info')->where('id', $authUser->user_id)->first();
-            // dd($account_name->email);
-            Session::put('user_name', $account_name->user_info->name);
-            Session::put('phone', $account_name->user_info->phone);
-            Session::put('email', $account_name->email);
-            Session::put('address', $account_name->user_info->address);
-            Session::put('date', $account_name->user_info->birthday);
-            Session::put('login', true);
-            Session::put('id', $account_name->id);
+            $this->sessionProfile($authUser);
         }
         return redirect()->route('admin.index')->with('message', 'Đăng nhập thành công');
     }
@@ -135,21 +120,34 @@ class AuthController extends Controller
                     'account_id' => $orang->id,
                     'name' => $users->name,
                     'gender' => ' ',
-                    'birthday' => ' ',
+                    // 'birthday' => '',
                     'address' => ' ',
                     'phone' => ' ',
                 ]);
             }
-            $account_user_new->users()->associate($orang, $user_info);
+            $account_user_new->account()->associate($orang, $user_info);
             $account_user_new->save();
             return $account_user_new;
         }
 
     }
 
-    public function logout()
+    public function sessionProfile($authUser){
+        $account_name = Account::with('user_info')->where('id', $authUser->account_id)->first();
+        Session::put('user_name', $account_name->user_info->name);
+        Session::put('phone', $account_name->user_info->phone);
+        Session::put('email', $account_name->email);
+        Session::put('address', $account_name->user_info->address);
+        Session::put('date', $account_name->user_info->birthday);
+        Session::put('login', true);
+        Session::put('id', $account_name->id);
+        Session::put('role', $account_name->role);
+    }
+
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->flush();
         return redirect()->route('login');
     }
 }

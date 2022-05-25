@@ -12,7 +12,7 @@ class Account extends Authenticatable
     use HasFactory, Notifiable;
     protected $table = 'account';
     protected $fillable = [
-        'email', 'password',
+        'email', 'password', 'role', 'status',
     ];
     protected $hidden = [
         'password', 'remember_token',

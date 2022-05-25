@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccAsocialTable extends Migration
+class CreateAccSocialTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAccAsocialTable extends Migration
      */
     public function up()
     {
-        Schema::create('acc_asocial', function (Blueprint $table) {
+        Schema::create('acc_social', function (Blueprint $table) {
             $table->id();
             $table->string('provider_user_id');
             $table->string('provider');
@@ -29,6 +29,6 @@ class CreateAccAsocialTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('acc_asocial');
+        Schema::dropIfExists('acc_social');
     }
 }

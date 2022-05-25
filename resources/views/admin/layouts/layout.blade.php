@@ -14,7 +14,7 @@
     <link href="{{ asset('frontend/dist/css/demo.min.css') }}" rel="stylesheet" />
 </head>
 
-<body class=" layout-fluid">
+<body class=" theme-light">
     <div class="page">
         @include('admin.layouts.header')
 

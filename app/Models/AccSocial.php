@@ -9,8 +9,13 @@ class AccSocial extends Model
 {
     use HasFactory;
     protected $table = 'acc_social';
+    protected $fillable = [
+        'provider_user_id',
+        'provider',
+        'account_id',
+    ];
 
     public function account(){
-        return $this->hasOne(Account::class, 'account_id');
+        return $this->belongsTo(Account::class, 'account_id');
     }
 }

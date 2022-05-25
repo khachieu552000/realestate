@@ -17,7 +17,7 @@ class CreateUserInfoTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('gender');
-            $table->date('birthday');
+            $table->date('birthday')->nullable();
             $table->text('address');
             $table->text('phone');
             $table->integer('account_id');
