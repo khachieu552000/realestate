@@ -16,7 +16,8 @@
         <div class="container-xl">
             <div class="row row-cards">
                 <div class="col-6">
-                    <form action="https://httpbin.org/post" method="post" class="card">
+                    <form action="{{ route('change-password-level-one') }}" method="post" class="card">
+                        @csrf
                         <div class="card-header">
                             <h4 class="card-title">Thay đổi mật khẩu cấp 1</h4>
                         </div>
@@ -25,22 +26,41 @@
                                 <div class="col-xl-2"></div>
                                 <div class="col-xl-8">
                                     <div class="row">
+                                        @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                        @endif
+                                        @if (session('message'))
+                                        <div class="alert alert-success">
+                                            {{ session('message') }}
+                                        </div>
+                                        @endif
                                         <div class="col-md-6 col-xl-12">
                                             <div class="mb-3">
                                                 <label class="form-label required">Mật khẩu cũ</label>
-                                                <input type="password" class="form-control" name="name"/>
+                                                <input type="password" class="form-control" name="old_password"/>
+                                                @error('old_password')
+                                                <p style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-xl-12">
                                             <div class="mb-3">
                                                 <label class="form-label required">Mật khẩu mới</label>
-                                                <input type="password" class="form-control" name="name"/>
+                                                <input type="password" class="form-control" name="password"/>
+                                                @error('password')
+                                                <p style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-xl-12">
                                             <div class="mb-3">
                                                 <label class="form-label required">Xác nhận mật khẩu</label>
-                                                <input type="password" class="form-control" name="name"/>
+                                                <input type="password" class="form-control" name="confirm_password"/>
+                                                @error('confirm_password')
+                                                <p style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +76,8 @@
                     </form>
                 </div>
                 <div class="col-6">
-                    <form action="https://httpbin.org/post" method="post" class="card">
+                    <form action="{{ route('change-password-level-two') }}" method="post" class="card">
+                        @csrf
                         <div class="card-header">
                             <h4 class="card-title">Thay đổi mật khẩu cấp 2</h4>
                         </div>
@@ -65,22 +86,41 @@
                                 <div class="col-xl-2"></div>
                                 <div class="col-xl-8">
                                     <div class="row">
+                                        @if (session('error_level2'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error_level2') }}
+                                        </div>
+                                        @endif
+                                        @if (session('message_level2'))
+                                        <div class="alert alert-success">
+                                            {{ session('message_level2') }}
+                                        </div>
+                                        @endif
                                         <div class="col-md-6 col-xl-12">
                                             <div class="mb-3">
                                                 <label class="form-label required">Mật khẩu cũ</label>
-                                                <input type="password" class="form-control" name="name"/>
+                                                <input type="password" class="form-control" name="old_password"/>
+                                                @error('old_password')
+                                                <p style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-xl-12">
                                             <div class="mb-3">
                                                 <label class="form-label required">Mật khẩu mới</label>
-                                                <input type="password" class="form-control" name="name"/>
+                                                <input type="password" class="form-control" name="password"/>
+                                                @error('password')
+                                                <p style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-xl-12">
                                             <div class="mb-3">
                                                 <label class="form-label required">Xác nhận mật khẩu</label>
-                                                <input type="password" class="form-control" name="name"/>
+                                                <input type="password" class="form-control" name="confirm_password"/>
+                                                @error('confirm_password')
+                                                <p style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>

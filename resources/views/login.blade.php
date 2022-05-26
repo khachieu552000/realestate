@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Sign in - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>Đăng nhập</title>
     <!-- CSS files -->
     <link href="{{ asset('frontend/dist/css/tabler.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/dist/css/tabler-flags.min.css') }}" rel="stylesheet" />
@@ -72,7 +72,7 @@
                             <input type="checkbox" class="form-check-input" name="remember" />
                             <span class="form-check-label" style="display:inline">Ghi nhớ đăng nhập</span>
                             <span class="form-label-description">
-                                <a href="./forgot-password.html">Quên mật khẩu?</a>
+                                <a href="{{ route('forgot-password') }}">Quên mật khẩu?</a>
                             </span>
                         </label>
                     </div>

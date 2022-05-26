@@ -21,6 +21,7 @@
         @yield('content')
     </div>
     <!-- Libs JS -->
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script src="{{ asset('frontend/dist/libs/apexcharts/dist/apexcharts.min.js') }}" defer></script>
     <script src="{{ asset('frontend/dist/libs/jsvectormap/dist/js/jsvectormap.min.js') }}" defer></script>
     <script src="{{ asset('frontend/dist/libs/jsvectormap/dist/maps/world.js') }}" defer></script>
@@ -28,6 +29,7 @@
     <!-- Tabler Core -->
     <script src="{{ asset('frontend/dist/js/tabler.min.js') }}" defer></script>
     <script src="{{ asset('frontend/dist/js/demo.min.js') }}" defer></script>
+    @yield('script')
     <script>
         // @formatter:off
         document.addEventListener("DOMContentLoaded", function() {
