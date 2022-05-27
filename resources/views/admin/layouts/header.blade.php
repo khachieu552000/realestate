@@ -5,7 +5,8 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href=".">
-                <img src="{{ asset('images/header-logo.7a6f7de8.svg') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                <img src="{{ asset('images/header-logo.7a6f7de8.svg') }}" width="110" height="32" alt="Tabler"
+                    class="navbar-brand-image">
             </a>
         </h1>
         <ul class="navbar-nav">
@@ -48,6 +49,9 @@
                         <div class="dropdown-menu-column">
                             <a class="dropdown-item" href="{{ route('slide-index') }}">
                                 Quản lý slide
+                            </a>
+                            <a class="dropdown-item" href="{{ route('news-index') }}">
+                                Quản lý tin tức
                             </a>
                         </div>
                     </div>
@@ -124,47 +128,8 @@
                 <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="./layout-horizontal.html">
-                                Horizontal
-                            </a>
-                            <a class="dropdown-item" href="./layout-boxed.html">
-                                Boxed
-                                <span class="badge badge-sm bg-green text-uppercase ms-2">New</span>
-                            </a>
-                            <a class="dropdown-item" href="./layout-vertical.html">
-                                Vertical
-                            </a>
-                            <a class="dropdown-item" href="./layout-vertical-transparent.html">
-                                Vertical transparent
-                            </a>
-                            <a class="dropdown-item" href="./layout-vertical-right.html">
-                                Right vertical
-                            </a>
-                            <a class="dropdown-item" href="./layout-condensed.html">
-                                Condensed
-                            </a>
-                            <a class="dropdown-item" href="./layout-combo.html">
-                                Combined
-                            </a>
-                        </div>
-                        <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="./layout-navbar-dark.html">
-                                Navbar dark
-                            </a>
-                            <a class="dropdown-item" href="./layout-navbar-sticky.html">
-                                Navbar sticky
-                            </a>
-                            <a class="dropdown-item" href="./layout-navbar-overlap.html">
-                                Navbar overlap
-                            </a>
-                            <a class="dropdown-item" href="./layout-rtl.html">
-                                RTL mode
-                            </a>
-                            <a class="dropdown-item active" href="./layout-fluid.html">
-                                Fluid
-                            </a>
-                            <a class="dropdown-item" href="./layout-fluid-vertical.html">
-                                Fluid vertical
+                            <a class="dropdown-item" href="{{ route('category-index') }}">
+                                Quản lý danh mục
                             </a>
                         </div>
                     </div>
@@ -197,19 +162,18 @@
                     data-bs-toggle="tooltip" data-bs-placement="bottom">
                     <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+                        <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
                     </svg>
                 </a>
                 <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
                     data-bs-toggle="tooltip" data-bs-placement="bottom">
                     <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <circle cx="12" cy="12" r="4" />
                         <path
@@ -276,10 +240,10 @@
                                         <div class="col-auto">
                                             <a href="#" class="list-group-item-actions show">
                                                 <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon text-yellow" width="24" height="24"
-                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-yellow"
+                                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path
                                                         d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
@@ -344,44 +308,42 @@
                     </div>
                 </div>
             </div>
-            @if(Session('login'))
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
-                    aria-label="Open user menu">
-                    <span class="avatar avatar-sm"
-                        style="background-image: url(./static/avatars/000m.jpg)"></span>
-                    <div class="d-none d-xl-block ps-2">
-                        <div>{{ Session('user_name') }}</div>
-                        <div class="mt-1 small text-muted">{{ Session('role') }}</div>
+            @if (Session('login'))
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                        aria-label="Open user menu">
+                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                        <div class="d-none d-xl-block ps-2">
+                            <div>{{ Session('user_name') }}</div>
+                            <div class="mt-1 small text-muted">{{ Session('role') }}</div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <a href="{{ route('profile-information') }}" class="dropdown-item">Thông tin cá nhân</a>
+                        <a href="{{ route('change-password') }}" class="dropdown-item">Thay đổi mật khẩu</a>
+                        <a href="{{ route('password-level-two') }}" class="dropdown-item">Đặt mật khẩu cấp 2</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('logout') }}" class="dropdown-item">Đăng xuất</a>
                     </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="{{ route('profile-information') }}" class="dropdown-item">Thông tin cá nhân</a>
-                    <a href="{{ route('change-password') }}" class="dropdown-item">Thay đổi mật khẩu</a>
-                    <a href="{{ route('password-level-two') }}" class="dropdown-item">Đặt mật khẩu cấp 2</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item">Đăng xuất</a>
                 </div>
-            </div>
             @elseif (Auth::check())
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
-                    aria-label="Open user menu">
-                    <span class="avatar avatar-sm"
-                        style="background-image: url(./static/avatars/000m.jpg)"></span>
-                    <div class="d-none d-xl-block ps-2">
-                        <div>{{ Auth::user()->user_info->name }}</div>
-                        <div class="mt-1 small text-muted">{{ Auth::user()->role }}</div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                        aria-label="Open user menu">
+                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                        <div class="d-none d-xl-block ps-2">
+                            <div>{{ Auth::user()->user_info->name }}</div>
+                            <div class="mt-1 small text-muted">{{ Auth::user()->role }}</div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <a href="{{ route('profile-information') }}" class="dropdown-item">Thông tin cá nhân</a>
+                        <a href="{{ route('change-password') }}" class="dropdown-item">Thay đổi mật khẩu</a>
+                        <a href="{{ route('password-level-two') }}" class="dropdown-item">Đặt mật khẩu cấp 2</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('logout') }}" class="dropdown-item">Đăng xuất</a>
                     </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="{{ route('profile-information') }}" class="dropdown-item">Thông tin cá nhân</a>
-                    <a href="{{ route('change-password') }}" class="dropdown-item">Thay đổi mật khẩu</a>
-                    <a href="{{ route('password-level-two') }}" class="dropdown-item">Đặt mật khẩu cấp 2</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item">Đăng xuất</a>
                 </div>
-            </div>
             @endif
         </div>
     </div>

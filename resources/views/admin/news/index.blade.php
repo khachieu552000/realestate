@@ -8,7 +8,7 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Quản lý slide
+                            Quản lý tin tức
                         </h2>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                             <div class="card-body py-3">
                                 <div class="d-flex">
                                     <div class="text-muted">
-                                        <a href="{{ route('show-add-slide') }}" class="btn btn-primary w-100">Thêm mới</a>
+                                        <a href="{{ route('show-add-news') }}" class="btn btn-primary w-100">Thêm mới</a>
                                     </div>
                                     <div class="ms-auto text-muted">
                                         Search:
@@ -42,27 +42,31 @@
                                 <thead>
                                     <tr>
                                         <th class="w-1">STT</th>
-                                        <th>Tên</th>
+                                        <th>Tiêu đề</th>
                                         <th>Hình ảnh</th>
+                                        <th>Nội dung</th>
+                                        <th>Ngày đăng</th>
                                         <th class="w-1">#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($slide))
+                                    @if (isset($news))
                                         @php
-                                            $i = 1;
+                                            $index = 1;
                                         @endphp
-                                        @foreach ($slide as $item)
+                                        @foreach ($news as $item)
                                             <tr>
-                                                <td><span class="text-muted">{{ $i++ }}</span></td>
-                                                <td>{{ $item->name }}</td>
+                                                <td><span class="text-muted">{{ $index++ }}</span></td>
+                                                <td>{{ $item->title }}</td>
                                                 <td>
-                                                    <img src="{{ asset($item->image) }}" height="150" width="300"
-                                                        alt="{{ $item->name }}">
+                                                    <img src="{{ asset($item->image) }}" height="150" width="300" alt="">
                                                 </td>
+                                                <td>{!! $item->content !!}</td>
+                                                <td>{{ $item->created_at }}</td>
                                                 <td class="text-end">
-                                                    <a href="" class="btn btn-primary w-20">Sửa</a>
-                                                    <a href="{{ route('delete', ['id_slide' => $item->id]) }}"
+                                                    <a href="{{ route('show-update-news', ['id_news' => $item->id]) }}"
+                                                        class="btn btn-primary w-20">Sửa</a>
+                                                    <a href="{{ route('delete-news', ['id_news' => $item->id]) }}"
                                                         class="btn btn-primary w-20">Xoá</a>
                                                 </td>
                                             </tr>

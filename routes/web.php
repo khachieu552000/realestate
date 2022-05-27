@@ -3,6 +3,8 @@
 use App\Http\Controllers\Web\Admin\ProfileController;
 use App\Http\Controllers\Web\Admin\AdminController;
 use App\Http\Controllers\Web\Admin\AuthController;
+use App\Http\Controllers\Web\Admin\CategoryController;
+use App\Http\Controllers\Web\Admin\NewsController;
 use App\Http\Controllers\Web\Admin\SlideController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,8 +48,26 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('slide')->group(function () {
         Route::get('/', [SlideController::class, 'index'])->name('slide-index');
-        Route::get('create-slide', [SlideController::class, 'create'])->name('create-slide');
-        Route::post('create-slide', [SlideController::class, 'postCreate'])->name('post-create-slide');
+        Route::get('add-slide', [SlideController::class, 'showAddSlide'])->name('show-add-slide');
+        Route::post('add-slide', [SlideController::class, 'addSlide'])->name('add-slide');
+        Route::get('delete/{id_slide}', [SlideController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('news')->group(function () {
+        Route::get('/', [NewsController::class, 'index'])->name('news-index');
+        Route::get('add-news', [NewsController::class, 'showAddNews'])->name('show-add-news');
+        Route::post('add-news', [NewsController::class, 'addNews'])->name('add-news');
+        Route::get('update-news/{id_news}', [NewsController::class, 'showUpdateNews'])->name('show-update-news');
+        Route::post('update-news/{id_news}', [NewsController::class, 'updateNews'])->name('update-news');
+        Route::get('delete/{id_news}',[NewsController::class, 'delete'])->name('delete-news');
+    });
+
+    Route::prefix('category')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('category-index');
+        Route::get('add-category', [CategoryController::class, 'showAddCategory'])->name('show-add-category');
+        Route::post('add-category', [CategoryController::class, 'addCategory'])->name('add-category');
+        Route::get('update-category/{id_category}',[CategoryController::class, 'showUpdateCategory'])->name('show-update-category');
+        Route::post('update-category/{id_category}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
+        Route::get('delete-category/{id_category}', [CategoryController::class, 'delete'])->name('delete-category');
     });
 
 });

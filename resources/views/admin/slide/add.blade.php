@@ -5,7 +5,8 @@
             <div class="container-xl">
                 <div class="row row-cards">
                     <div class="col-12">
-                        <form action="{{ route('post-create-slide') }}" method="post" class="card" enctype="multipart/form-data">
+                        <form action="{{ route('add-slide') }}" method="post" class="card"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="card-header">
                                 <h4 class="card-title">Thêm mới slide</h4>
@@ -16,24 +17,25 @@
                                     <div class="col-xl-8">
                                         <div class="row">
                                             @if (session('message'))
-                                            <div class="alert alert-success">
-                                                {{ session('message') }}
-                                            </div>
+                                                <div class="alert alert-success">
+                                                    {{ session('message') }}
+                                                </div>
                                             @endif
                                             <div class="col-md-6 col-xl-12">
                                                 <div class="mb-3">
                                                     <label class="form-label required">Tên slide</label>
-                                                    <input type="text" class="form-control" name="name"/>
+                                                    <input type="text" class="form-control" name="name" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-xl-12">
                                                 <div class="mb-3">
                                                     <label class="form-label required">Hình ảnh</label>
-                                                    <input type="file" name="image_slide" id="image_slide" style="margin-bottom: 15px"/> <br>
+                                                    <input type="file" name="images" id="image"
+                                                        style="margin-bottom: 15px" /> <br>
                                                     <span>Xem trước :</span>
                                                     <img id="blah" src="" width="300px" height="150px" alt="">
-                                                    @error('image_slide')
-                                                    <p style="color: red">{{ $message }}</p>
+                                                    @error('image')
+                                                        <p style="color: red">{{ $message }}</p>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -65,7 +67,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        $("#image_slide").change(function() {
+        $("#image").change(function() {
             readURL(this);
         });
     </script>

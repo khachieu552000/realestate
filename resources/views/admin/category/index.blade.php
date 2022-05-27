@@ -8,7 +8,7 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Quản lý slide
+                            Quản lý danh mục
                         </h2>
                     </div>
                 </div>
@@ -22,7 +22,8 @@
                             <div class="card-body py-3">
                                 <div class="d-flex">
                                     <div class="text-muted">
-                                        <a href="{{ route('show-add-slide') }}" class="btn btn-primary w-100">Thêm mới</a>
+                                        <a href="{{ route('show-add-category') }}" class="btn btn-primary w-100">Thêm
+                                            mới</a>
                                     </div>
                                     <div class="ms-auto text-muted">
                                         Search:
@@ -34,36 +35,34 @@
                                 </div>
                             </div>
                         </div>
-                        @if (session('message'))
-                            <div class="alert alert-success">{{ session('message') }}</div>
-                        @endif
                         <div class="table-responsive">
                             <table class="table card-table table-vcenter text-nowrap datatable table-bordered">
                                 <thead>
                                     <tr>
                                         <th class="w-1">STT</th>
-                                        <th>Tên</th>
-                                        <th>Hình ảnh</th>
+                                        <th>Loại danh mục</th>
+                                        <th>Tên danh mục</th>
                                         <th class="w-1">#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($slide))
+                                    @if (isset($category))
                                         @php
-                                            $i = 1;
+                                            $index = 1;
                                         @endphp
-                                        @foreach ($slide as $item)
+                                        @foreach ($category as $item)
                                             <tr>
-                                                <td><span class="text-muted">{{ $i++ }}</span></td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>
-                                                    <img src="{{ asset($item->image) }}" height="150" width="300"
-                                                        alt="{{ $item->name }}">
-                                                </td>
+                                                <td><span class="text-muted">{{ $index++ }}</span></td>
+                                                <td></td>
+                                                @if ($item->parent_id === 0)
+                                                    <td><b>{{ $item->name }}</b></td>
+                                                @else
+                                                    <td>-- {{ $item->name }}</td>
+                                                @endif
                                                 <td class="text-end">
-                                                    <a href="" class="btn btn-primary w-20">Sửa</a>
-                                                    <a href="{{ route('delete', ['id_slide' => $item->id]) }}"
-                                                        class="btn btn-primary w-20">Xoá</a>
+                                                    <a href="{{ route('show-update-category', ['id_category' => $item->id]) }}"
+                                                        class="btn btn-primary w-20">Sửa</a>
+                                                    <a href="" class="btn btn-primary w-20">Xoá</a>
                                                 </td>
                                             </tr>
                                         @endforeach

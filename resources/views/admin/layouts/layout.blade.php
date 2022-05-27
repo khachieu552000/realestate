@@ -29,6 +29,7 @@
     <!-- Tabler Core -->
     <script src="{{ asset('frontend/dist/js/tabler.min.js') }}" defer></script>
     <script src="{{ asset('frontend/dist/js/demo.min.js') }}" defer></script>
+    <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
     @yield('script')
     <script>
         // @formatter:off
