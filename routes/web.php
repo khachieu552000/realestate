@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Web\Admin\ProfileController;
 use App\Http\Controllers\Web\Admin\AdminController;
 use App\Http\Controllers\Web\Admin\AuthController;
 use App\Http\Controllers\Web\Admin\CategoryController;
+use App\Http\Controllers\Web\Admin\DirectionsController;
 use App\Http\Controllers\Web\Admin\NewsController;
 use App\Http\Controllers\Web\Admin\SlideController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use phpDocumentor\Reflection\Location;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
@@ -48,26 +51,67 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('slide')->group(function () {
         Route::get('/', [SlideController::class, 'index'])->name('slide-index');
-        Route::get('add-slide', [SlideController::class, 'showAddSlide'])->name('show-add-slide');
-        Route::post('add-slide', [SlideController::class, 'addSlide'])->name('add-slide');
-        Route::get('delete/{id_slide}', [SlideController::class, 'delete'])->name('delete');
+        Route::get('/add-slide', [SlideController::class, 'showAddSlide'])->name('show-add-slide');
+        Route::post('/add-slide', [SlideController::class, 'addSlide'])->name('add-slide');
+        Route::get('/delete/{id_slide}', [SlideController::class, 'delete'])->name('delete');
     });
     Route::prefix('news')->group(function () {
         Route::get('/', [NewsController::class, 'index'])->name('news-index');
-        Route::get('add-news', [NewsController::class, 'showAddNews'])->name('show-add-news');
-        Route::post('add-news', [NewsController::class, 'addNews'])->name('add-news');
-        Route::get('update-news/{id_news}', [NewsController::class, 'showUpdateNews'])->name('show-update-news');
-        Route::post('update-news/{id_news}', [NewsController::class, 'updateNews'])->name('update-news');
-        Route::get('delete/{id_news}',[NewsController::class, 'delete'])->name('delete-news');
+        Route::get('/add-news', [NewsController::class, 'showAddNews'])->name('show-add-news');
+        Route::post('/add-news', [NewsController::class, 'addNews'])->name('add-news');
+        Route::get('/update-news/{id_news}', [NewsController::class, 'showUpdateNews'])->name('show-update-news');
+        Route::post('/update-news/{id_news}', [NewsController::class, 'updateNews'])->name('update-news');
+        Route::get('/delete/{id_news}',[NewsController::class, 'delete'])->name('delete-news');
     });
 
     Route::prefix('category')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('category-index');
-        Route::get('add-category', [CategoryController::class, 'showAddCategory'])->name('show-add-category');
-        Route::post('add-category', [CategoryController::class, 'addCategory'])->name('add-category');
-        Route::get('update-category/{id_category}',[CategoryController::class, 'showUpdateCategory'])->name('show-update-category');
-        Route::post('update-category/{id_category}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
-        Route::get('delete-category/{id_category}', [CategoryController::class, 'delete'])->name('delete-category');
+        Route::get('/add-category', [CategoryController::class, 'showAddCategory'])->name('show-add-category');
+        Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('add-category');
+        Route::get('/update-category/{id_category}',[CategoryController::class, 'showUpdateCategory'])->name('show-update-category');
+        Route::post('/update-category/{id_category}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
+        Route::get('/delete-category/{id_category}', [CategoryController::class, 'delete'])->name('delete-category');
+    });
+
+    Route::prefix('location')->group(function () {
+        Route::get('/provinces', [LocationController::class, 'listProvinces'])->name('list-provinces');
+        Route::get('/add-provinces', [LocationController::class, 'showAddProvinces'])->name('show-add-provinces');
+        Route::post('/add-provinces', [LocationController::class, 'addProvinces'])->name('add-provinces');
+        Route::get('/update-provinces/{id_provinces}', [LocationController::class, 'showUpdateProvinces'])->name('show-update-province');
+        Route::post('/update-provinces/{id_provinces}', [LocationController::class, 'updateProvinces'])->name('update-province');
+        Route::get('/delete-provinces/{id_provinces}', [LocationController::class, 'deleteProvinces'])->name('delete-provinces');
+
+        Route::get('/district', [LocationController::class, 'listDistrict'])->name('list-district');
+        Route::get('/add-district', [LocationController::class, 'showAddDistrict'])->name('show-add-district');
+        Route::post('/add-district', [LocationController::class, 'addDistrict'])->name('add-district');
+        Route::get('/update-district/{id_district}', [LocationController::class, 'showUpdateDistrict'])->name('show-update-district');
+        Route::post('/update-district/{id_district}',[LocationController::class, 'updateDistrict'])->name('update-district');
+        Route::get('/delete-district/{id_district}', [LocationController::class, 'deleteDistrict'])->name('delete-district');
+
+        Route::get('/ward', [LocationController::class, 'listWard'])->name('list-ward');
+        Route::get('/add-ward', [LocationController::class, 'showAddWard'])->name('show-add-ward');
+        Route::post('/add-ward', [LocationController::class, 'addWard'])->name('add-ward');
+        Route::get('/update-ward/{id_ward}', [LocationController::class, 'showUpdateWard'])->name('show-update-ward');
+        Route::post('/update-ward/{id_ward}',[LocationController::class, 'updateWard'])->name('update-ward');
+        Route::get('/delete-ward/{id_ward}', [LocationController::class, 'deleteWard'])->name('delete-ward');
+
+        Route::get('/street', [LocationController::class, 'listStreet'])->name('list-street');
+        Route::get('/add-street', [LocationController::class, 'showAddStreet'])->name('show-add-street');
+        Route::post('/add-street', [LocationController::class, 'addStreet'])->name('add-street');
+        Route::get('/update-street/{id_street}', [LocationController::class, 'showUpdateStreet'])->name('show-update-street');
+        Route::post('/update-street/{id_street}',[LocationController::class, 'updateStreet'])->name('update-street');
+        Route::get('/delete-street/{id_street}', [LocationController::class, 'deleteStreet'])->name('delete-street');
+
+        Route:: get('/list-detail', [LocationController::class, 'listDetail'])->name('list-detail');
+
+        Route::prefix('directions')->group(function () {
+            Route::get('/',[DirectionsController::class, 'index'])->name('list-directions');
+            Route::get('/add-directions', [DirectionsController::class, 'showAddDirections'])->name('show-add-directions');
+            Route::post('/add-directions', [DirectionsController::class, 'addDirections'])->name('add-directions');
+            Route::get('/update-directions/{id_directions}', [DirectionsController::class, 'showUpdateDirections'])->name('show-update-directions');
+            Route::post('/update-directions/{id_directions}', [DirectionsController::class, 'updateDirections'])->name('update-directions');
+            Route::get('/delete-directions/{id_directions}', [DirectionsController::class, 'deleteDirections'])->name('delete-directions');
+        });
     });
 
 });

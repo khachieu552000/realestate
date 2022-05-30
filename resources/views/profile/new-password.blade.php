@@ -21,6 +21,29 @@
                 @csrf
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Nhập mật khẩu mới của bạn</h2>
+                    @if (session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
+                    <div class="mb-2">
+                        <label class="form-label"> OTP</label>
+                        <div class="input-group input-group-flat">
+                            <input type="type" class="form-control" name="otp" placeholder="Mã OTP"
+                                autocomplete="off">
+                        </div>
+                        @error('otp')
+                        <p style="color: red">{{ $message }}</p>
+                        @enderror
+                    </div>
+                       <div class="mb-2">
+                        <label class="form-label"> Mật khẩu cấp 2</label>
+                        <div class="input-group input-group-flat">
+                            <input type="password" class="form-control" name="password_level_2" placeholder="Password"
+                                autocomplete="off">
+                        </div>
+                        @error('password_level_2')
+                        <p style="color: red">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="mb-2">
                         <label class="form-label"> Mật khẩu mới</label>
                         <div class="input-group input-group-flat">

@@ -9,6 +9,10 @@ class Street extends Model
 {
     use HasFactory;
     protected $table = 'street';
+    protected $fillable = [
+        'name',
+        'ward_id'
+    ];
 
     public function property(){
         return $this->hasMany(Property::class, 'street_id');

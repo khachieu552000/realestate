@@ -11,7 +11,7 @@
         </h1>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="./index.html">
+                <a class="nav-link" href="{{ route('admin.index') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <!-- Download SVG icon from http://tabler-icons.io/i/home -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -70,7 +70,7 @@
                         </svg>
                     </span>
                     <span class="nav-link-title">
-                        Tin tức
+                        Nhân viên
                     </span>
                 </a>
             </li>
@@ -94,13 +94,20 @@
                 <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="./activity.html">
-                                Activity
+                            <a class="dropdown-item" href="{{ route('list-detail') }}">
+                                Danh sách chi tiết
                             </a>
-                        </div>
-                        <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="./license.html">
-                                License
+                            <a class="dropdown-item" href="{{ route('list-provinces') }}">
+                                Tỉnh/Thành phố
+                            </a>
+                            <a class="dropdown-item" href="{{ route('list-district') }}">
+                                Quận/Huyện
+                            </a>
+                            <a class="dropdown-item" href="{{ route('list-ward') }}">
+                                Phường/Xã
+                            </a>
+                            <a class="dropdown-item" href="{{ route('list-street') }}">
+                                Đường/Phố
                             </a>
                         </div>
                     </div>
@@ -130,6 +137,9 @@
                         <div class="dropdown-menu-column">
                             <a class="dropdown-item" href="{{ route('category-index') }}">
                                 Quản lý danh mục
+                            </a>
+                            <a class="dropdown-item" href="{{ route('list-directions') }}">
+                                Quản lý hướng
                             </a>
                         </div>
                     </div>

@@ -9,6 +9,9 @@ class Direction extends Model
 {
     use HasFactory;
     protected $table = 'directions';
+    protected $fillable = [
+        'name',
+    ];
 
     public function property(){
         $this->hasMany(Property::class, 'direction_id');

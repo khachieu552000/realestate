@@ -9,6 +9,10 @@ class Ward extends Model
 {
     use HasFactory;
     protected $table = 'ward';
+    protected $fillable = [
+        'name',
+        'district_id',
+    ];
 
     public function street(){
         return $this->hasMany(Street::class, 'ward_id');

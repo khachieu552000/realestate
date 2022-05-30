@@ -9,9 +9,13 @@ class District extends Model
 {
     use HasFactory;
     protected $table = 'district';
-    
-    public function provincial(){
-        return $this->belongsTo(Provincial::class, 'provincial_id');
+    protected $fillable = [
+        'name',
+        'provinces_id',
+    ];
+
+    public function provinces(){
+        return $this->belongsTo(Provinces::class, 'provinces_id');
     }
 
     public function ward(){

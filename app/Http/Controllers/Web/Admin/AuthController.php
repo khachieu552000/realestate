@@ -85,21 +85,21 @@ class AuthController extends Controller
     public function callbackGoogle()
     {
         $users = Socialite::driver('google')->stateless()->user();
-        $authUser = $this->findOrCreateUser($users, 'google');
-        if($authUser){
-            $this->sessionProfile($authUser);
+        $auth_user = $this->findOrCreateUser($users, 'google');
+        if($auth_user){
+            $this->sessionProfile($auth_user);
         }
         elseif($account_user_new){
-            $this->sessionProfile($authUser);
+            $this->sessionProfile($auth_user);
         }
         return redirect()->route('admin.index')->with('message', 'Đăng nhập thành công');
     }
 
     public function findOrCreateUser($users, $provider)
     {
-        $authUser = AccSocial::where('provider_user_id', $users->id)->first();
-        if ($authUser) {
-            return $authUser;
+        $auth_user = AccSocial::where('provider_user_id', $users->id)->first();
+        if ($auth_user) {
+            return $auth_user;
         }
         else{
             $account_user_new = new AccSocial([
@@ -107,17 +107,17 @@ class AuthController extends Controller
                 'provider' => strtoupper($provider)
             ]);
 
-            $orang = Account::where('email', $users->email)->first();
+            $account = Account::where('email', $users->email)->first();
 
-            if (!$orang) {
-                $orang = Account::create([
+            if (!$account) {
+                $account = Account::create([
                     'email' => $users->email,
                     'password' => '',
                     'role' => 'user',
                     'status' => 'active',
                 ]);
                 $user_info = UserInfo::create([
-                    'account_id' => $orang->id,
+                    'account_id' => $account->id,
                     'name' => $users->name,
                     'gender' => ' ',
                     // 'birthday' => '',
@@ -125,15 +125,15 @@ class AuthController extends Controller
                     'phone' => ' ',
                 ]);
             }
-            $account_user_new->account()->associate($orang, $user_info);
+            $account_user_new->account()->associate($account, $user_info);
             $account_user_new->save();
             return $account_user_new;
         }
 
     }
 
-    public function sessionProfile($authUser){
-        $account_name = Account::with('user_info')->where('id', $authUser->account_id)->first();
+    public function sessionProfile($auth_user){
+        $account_name = Account::with('user_info')->where('id', $auth_user->account_id)->first();
         Session::put('user_name', $account_name->user_info->name);
         Session::put('phone', $account_name->user_info->phone);
         Session::put('email', $account_name->email);
