@@ -1,17 +1,21 @@
 <?php
 
-use App\Http\Controllers\LocationController;
+use App\Http\Controllers\Web\Admin\LocationController;
 use App\Http\Controllers\Web\Admin\ProfileController;
 use App\Http\Controllers\Web\Admin\AdminController;
 use App\Http\Controllers\Web\Admin\AuthController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\DirectionsController;
 use App\Http\Controllers\Web\Admin\NewsController;
+use App\Http\Controllers\Web\Admin\PostTypeController;
+use App\Http\Controllers\Web\Admin\PropertyController;
+use App\Http\Controllers\Web\Admin\PropertyTypeController;
 use App\Http\Controllers\Web\Admin\SlideController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use phpDocumentor\Reflection\Location;
-use Symfony\Component\HttpKernel\Profiler\Profile;
+
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Route;
+// use phpDocumentor\Reflection\Location;
+// use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +70,6 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('category')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('category-index');
-        Route::get('/add-category', [CategoryController::class, 'showAddCategory'])->name('show-add-category');
         Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('add-category');
         Route::get('/update-category/{id_category}',[CategoryController::class, 'showUpdateCategory'])->name('show-update-category');
         Route::post('/update-category/{id_category}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
@@ -102,16 +105,41 @@ Route::prefix('admin')->group(function () {
         Route::post('/update-street/{id_street}',[LocationController::class, 'updateStreet'])->name('update-street');
         Route::get('/delete-street/{id_street}', [LocationController::class, 'deleteStreet'])->name('delete-street');
 
-        Route:: get('/list-detail', [LocationController::class, 'listDetail'])->name('list-detail');
-
-        Route::prefix('directions')->group(function () {
-            Route::get('/',[DirectionsController::class, 'index'])->name('list-directions');
-            Route::get('/add-directions', [DirectionsController::class, 'showAddDirections'])->name('show-add-directions');
-            Route::post('/add-directions', [DirectionsController::class, 'addDirections'])->name('add-directions');
-            Route::get('/update-directions/{id_directions}', [DirectionsController::class, 'showUpdateDirections'])->name('show-update-directions');
-            Route::post('/update-directions/{id_directions}', [DirectionsController::class, 'updateDirections'])->name('update-directions');
-            Route::get('/delete-directions/{id_directions}', [DirectionsController::class, 'deleteDirections'])->name('delete-directions');
-        });
+        Route::get('/list-detail', [LocationController::class, 'listDetail'])->name('list-detail');
+        Route::post('/import-excel', [LocationController::class, 'importLocation'])->name('import-location');
+        Route::get('/export-excel', [LocationController::class, 'exportLocation'])->name('export-location');
     });
 
+    Route::prefix('directions')->group(function () {
+        Route::get('/',[DirectionsController::class, 'index'])->name('list-directions');
+        Route::get('/add-directions', [DirectionsController::class, 'showAddDirections'])->name('show-add-directions');
+        Route::post('/add-directions', [DirectionsController::class, 'addDirections'])->name('add-directions');
+        Route::get('/update-directions/{id_directions}', [DirectionsController::class, 'showUpdateDirections'])->name('show-update-directions');
+        Route::post('/update-directions/{id_directions}', [DirectionsController::class, 'updateDirections'])->name('update-directions');
+        Route::get('/delete-directions/{id_directions}', [DirectionsController::class, 'deleteDirections'])->name('delete-directions');
+    });
+
+    Route::prefix('post-type')->group(function () {
+        Route::get('/',[PostTypeController::class, 'index'])->name('list-post-type');
+        Route::get('/add-post-type', [PostTypeController::class, 'showAddPostType'])->name('show-add-post-type');
+        Route::post('/add-post-type', [PostTypeController::class, 'addPostType'])->name('add-post-type');
+        Route::get('/update-post-type/{id_post_type}', [PostTypeController::class, 'showUpdatePostType'])->name('show-update-post-type');
+        Route::post('/update-post-type/{id_post_type}', [PostTypeController::class, 'updatePostType'])->name('update-post-type');
+        Route::get('/delete-post-type/{id_post_type}', [PostTypeController::class, 'deletePostType'])->name('delete-post-type');
+    });
+
+    Route::prefix('property-type')->group(function () {
+        Route::get('/', [PropertyTypeController::class, 'index'])->name('list-property-type');
+        Route::post('/add-property-type', [PropertyTypeController::class, 'addPropertyType'])->name('add-property-type');
+        Route::get('/update-property-type/{id_property_type}',[PropertyTypeController::class, 'showUpdatePropertyType'])->name('show-update-property-type');
+        Route::post('/update-property-type/{id_property_type}', [PropertyTypeController::class, 'updatePropertyType'])->name('update-property-type');
+        Route::get('/delete-property-type/{id_property_type}', [PropertyTypeController::class, 'delete'])->name('delete-property-type');
+    });
+
+    Route::prefix('property')->group(function () {
+        Route::get('/', [PropertyController::class, 'index'])->name('list-property');
+        Route::post('/select-delivery', [PropertyController::class,'selectDelivery'])->name('select-delivery');
+        Route::get('/add-property', [PropertyController::class, 'showAddProperty'])->name('show-add-property');
+        Route::post('/add-property', [PropertyController::class, 'addProperty'])->name('add-property');
+    });
 });

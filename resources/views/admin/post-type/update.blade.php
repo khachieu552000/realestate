@@ -5,11 +5,10 @@
             <div class="container-xl">
                 <div class="row row-cards">
                     <div class="col-12">
-                        <form action="{{ route('add-category') }}" method="post" class="card"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('update-post-type', ['id_post_type'=> $post_type->id]) }}" method="post" class="card">
                             @csrf
                             <div class="card-header">
-                                <h4 class="card-title">Thêm mới tin tức</h4>
+                                <h4 class="card-title">Cập nhật loại bài đăng</h4>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -22,20 +21,18 @@
                                                 </div>
                                             @endif
                                             <div class="mb-3">
-                                                <label class="form-label required">Tên danh mục</label>
-                                                <input type="text" class="form-control" name="name" />
+                                                <label class="form-label required">Tên</label>
+                                                <input type="text" class="form-control" name="name" value="{{ $post_type->name }}"/>
+                                                @error('name')
+                                                <p style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <div class="form-label">Danh mục</div>
-                                                <select class="form-select" name="parent_id">
-                                                    <option value="" selected>Chọn danh mục</option>
-                                                    <option value="0">Danh mục cha</option>
-                                                    @if (isset($parent))
-                                                        @foreach ($parent as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
+                                                <label class="form-label required">Giá tiền</label>
+                                                <input type="number" class="form-control" name="price" value="{{ $post_type->price }}"/>
+                                                @error('price')
+                                                <p style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>

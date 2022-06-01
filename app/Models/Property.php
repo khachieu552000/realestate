@@ -10,6 +10,26 @@ class Property extends Model
 {
     use HasFactory;
     protected $table = 'property';
+    protected $fillable = [
+        'name',
+        'investor',
+        'address',
+        'image',
+        'description',
+        'price',
+        'acreage',
+        'floors',
+        'bedrooms',
+        'bathrooms',
+        'juridical',
+        'property_type_id',
+        'direction_id',
+        'account_id',
+        'catehories_id',
+        'street_id',
+        'post_type_id',
+        'status',
+    ];
 
     public function directions(){
         return $this->belongsTo(Directions::class, 'direction_id');
@@ -33,5 +53,9 @@ class Property extends Model
 
     public function post_type(){
         return $this->belongsTo(PostType::class, 'post_type_id');
+    }
+
+    public function property_type(){
+        return $this->belongsTo(PropertyType::class, 'property_type_id');
     }
 }

@@ -135,11 +135,20 @@
                 <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
+                            <a class="dropdown-item" href="{{ route('list-post-type') }}">
+                                Quản lý loại tin
+                            </a>
                             <a class="dropdown-item" href="{{ route('category-index') }}">
                                 Quản lý danh mục
                             </a>
+                            <a class="dropdown-item" href="{{ route('list-property-type') }}">
+                                Quản lý loại bất động sản
+                            </a>
                             <a class="dropdown-item" href="{{ route('list-directions') }}">
                                 Quản lý hướng
+                            </a>
+                            <a class="dropdown-item" href="{{ route('list-property') }}">
+                                Quản lý dự án
                             </a>
                         </div>
                     </div>

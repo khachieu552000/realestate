@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostTypeTable extends Migration
+class CreatePropertyTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreatePostTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_type', function (Blueprint $table) {
+        Schema::create('property_type', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->double('price');
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreatePostTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_type');
+        Schema::dropIfExists('property_type');
     }
 }

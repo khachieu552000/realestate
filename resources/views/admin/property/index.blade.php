@@ -8,7 +8,7 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Quản lý danh mục
+                            Danh sách bất động sản
                         </h2>
                     </div>
                 </div>
@@ -27,9 +27,8 @@
                             <div class="card-body py-3">
                                 <div class="d-flex">
                                     <div class="text-muted">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Thêm mới
-                                          </button>
+                                        <a href="{{ route('show-add-property') }}" class="btn btn-primary w-100">Thêm
+                                            mới</a>
                                     </div>
                                     <div class="ms-auto text-muted">
                                         Search:
@@ -46,23 +45,36 @@
                                 <thead>
                                     <tr>
                                         <th class="w-1">STT</th>
-                                        <th>Tên danh mục</th>
+                                        <th>Tên</th>
+                                        <th>Loại bất động sản</th>
+                                        <th>Chủ đầu tư</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Giá</th>
+                                        <th>Diện tích</th>
+                                        <th>Địa chỉ</th>
+                                        <th></th>
                                         <th class="w-1">#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($category))
+                                    @if (isset($post_type))
                                         @php
                                             $index = 1;
                                         @endphp
-                                        @foreach ($category as $item)
+                                        @foreach ($post_type as $item)
                                             <tr>
                                                 <td><span class="text-muted">{{ $index++ }}</span></td>
                                                 <td>{{ $item->name }}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{ number_format($item->price) }} VNĐ</td>
                                                 <td class="text-end">
-                                                    <a href="#" data-url="{{ route('show-update-category', ['id_category' => $item->id]) }}"
-                                                        class="btn btn-primary w-20 btn-edit">Sửa</a>
-                                                    <a href="{{ route('delete-category', ['id_category' => $item->id]) }}" class="btn btn-primary w-20">Xoá</a>
+                                                    <a href="{{ route('show-update-post-type', ['id_post_type'=>$item->id]) }}" class="btn btn-primary w-20">Sửa</a>
+                                                    <a href="{{ route('delete-post-type', ['id_post_type'=>$item->id]) }}" class="btn btn-primary w-20">Xoá</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -110,29 +122,4 @@
             </div>
         </div>
     </div>
-    @include('admin.category.modal-add')
-    @include('admin.category.modal-update')
-@endsection
-@section('script')
-    <script>
-        $('.btn-edit').click(function(e) {
-            var url = $(this).attr('data-url');
-            $('#modal-edit').modal('show');
-            e.preventDefault();
-            $.ajax({
-                type: 'get',
-                url: url,
-                success: function(response) {
-                    $('#name-edit').val(response.data.name);
-                    $('#name-lsp').val(response.data.name);
-                    $('#form-edit').attr('action', '{{ asset('admin/category/update-category/') }}/' +
-                        response.data
-                        .id)
-                },
-                error: function(error) {
-
-                }
-            })
-        })
-    </script>
 @endsection

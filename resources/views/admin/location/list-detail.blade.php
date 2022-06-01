@@ -27,10 +27,12 @@
                             <div class="card-body py-3">
                                 <div class="d-flex">
                                     <div class="text-muted">
-                                        <a href="" class="btn btn-primary w-100">Import excel</a>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            Import excel
+                                          </button>
                                     </div>
                                     <div class="text-muted" style="margin-left: 10px">
-                                        <a href="" class="btn btn-primary w-100">Export excel</a>
+                                        <a href="{{ route('export-location') }}" class="btn btn-primary w-100">Export excel</a>
                                     </div>
                                     <div class="ms-auto text-muted">
                                         Search:
@@ -129,4 +131,7 @@
             </div>
         </div>
     </div>
+    @include('admin.location.modal-import')
 @endsection
+
+

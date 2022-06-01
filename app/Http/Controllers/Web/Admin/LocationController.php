@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Provinces;
 use App\Models\Street;
 use App\Models\Ward;
 use Illuminate\Http\Request;
+use Excel;
+use App\Exports\LocationExport;
+use App\Imports\LocationImport;
 
 class LocationController extends Controller
 {
@@ -56,7 +60,6 @@ class LocationController extends Controller
 
     public function deleteProvinces($id_provinces){
         $provinces = Provinces::with('district.ward.street')->find($id_provinces);
-        dd($provinces);
         foreach($provinces->district as $district){
             $district->delete();
             foreach($district->ward as $ward){
@@ -123,8 +126,7 @@ class LocationController extends Controller
     }
 
     public function deleteDistrict($id_district){
-        $district = District::with('ward.street')->find($id_district);\
-        dd($district->ward);
+        $district = District::with('ward.street')->find($id_district);
         foreach($district->ward as $ward){
             $ward->delete();
             foreach($ward->street as $street){
@@ -257,6 +259,24 @@ class LocationController extends Controller
     public function listDetail(){
         $location = Provinces::with('district.ward')->get();
         return view('admin.location.list-detail',compact('location'));
+    }
+
+    public function exportLocation(){
+        return Excel::download(new LocationExport(), 'location.xlsx');
+    }
+
+    /**
+     * In Progress
+     */
+
+    public function importLocation(Request $request){
+        $this->validate($request,[
+            'file_location' => 'required',
+        ]);
+        // $path = $request->file('file_location')->getRealPath();
+        // dd($request->file_location);
+        Excel::import(new LocationImport, $request->file('file_location'));
+        return redirect()->back()->with('message', 'success');
     }
 
 }

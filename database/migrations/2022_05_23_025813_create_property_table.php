@@ -25,10 +25,9 @@ class CreatePropertyTable extends Migration
             $table->bigInteger('floors');
             $table->bigInteger('bedrooms');
             $table->bigInteger('bathrooms');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->string('juridical');
+            $table->integer('property_type_id');
             $table->integer('direction_id');
-            $table->integer('juridical_id');
             $table->integer('account_id');
             $table->integer('categories_id');
             $table->integer('street_id');

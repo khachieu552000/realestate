@@ -8,7 +8,7 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Quản lý danh mục
+                            Quản lý loại hình bất động sản
                         </h2>
                     </div>
                 </div>
@@ -51,18 +51,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($category))
+                                    @if (isset($property_type))
                                         @php
                                             $index = 1;
                                         @endphp
-                                        @foreach ($category as $item)
+                                        @foreach ($property_type as $item)
                                             <tr>
                                                 <td><span class="text-muted">{{ $index++ }}</span></td>
                                                 <td>{{ $item->name }}</td>
                                                 <td class="text-end">
-                                                    <a href="#" data-url="{{ route('show-update-category', ['id_category' => $item->id]) }}"
+                                                    <a href="#" data-url="{{ route('show-update-property-type', ['id_property_type' => $item->id]) }}"
                                                         class="btn btn-primary w-20 btn-edit">Sửa</a>
-                                                    <a href="{{ route('delete-category', ['id_category' => $item->id]) }}" class="btn btn-primary w-20">Xoá</a>
+                                                    <a href="{{ route('delete-property-type', ['id_property_type' => $item->id]) }}" class="btn btn-primary w-20">Xoá</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -110,8 +110,8 @@
             </div>
         </div>
     </div>
-    @include('admin.category.modal-add')
-    @include('admin.category.modal-update')
+    @include('admin.property-type.modal-add')
+    @include('admin.property-type.modal-update')
 @endsection
 @section('script')
     <script>
@@ -125,7 +125,7 @@
                 success: function(response) {
                     $('#name-edit').val(response.data.name);
                     $('#name-lsp').val(response.data.name);
-                    $('#form-edit').attr('action', '{{ asset('admin/category/update-category/') }}/' +
+                    $('#form-edit').attr('action', '{{ asset('admin/property-type/update-property-type/') }}/' +
                         response.data
                         .id)
                 },
