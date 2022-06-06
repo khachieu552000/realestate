@@ -10,7 +10,7 @@ class PropertyType extends Model
     use HasFactory;
     protected $table = 'property_type';
     protected $fillable = [
-        'name',
+        'name', 'status'
     ];
 
     public function property(){

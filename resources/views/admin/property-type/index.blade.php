@@ -47,6 +47,7 @@
                                     <tr>
                                         <th class="w-1">STT</th>
                                         <th>Tên danh mục</th>
+                                        <th>Trạng thái</th>
                                         <th class="w-1">#</th>
                                     </tr>
                                 </thead>
@@ -59,6 +60,13 @@
                                             <tr>
                                                 <td><span class="text-muted">{{ $index++ }}</span></td>
                                                 <td>{{ $item->name }}</td>
+                                                <td>
+                                                    @if ($item->status === 0)
+                                                    Công khai |  <a href="{{ route('lock-status', ['id_property_type' => $item->id]) }}" class="btn btn-danger w-20" href="">Khoá</a>
+                                                    @elseif ($item->status === 1)
+                                                    <b>Chỉ mình quản trị viên</b>
+                                                    @endif
+                                                </td>
                                                 <td class="text-end">
                                                     <a href="#" data-url="{{ route('show-update-property-type', ['id_property_type' => $item->id]) }}"
                                                         class="btn btn-primary w-20 btn-edit">Sửa</a>

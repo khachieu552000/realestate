@@ -38,7 +38,7 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
                         <div class="table-responsive">
-                            <table class="table card-table table-vcenter text-nowrap datatable table-bordered">
+                            <table class="table card-table table-vcenter text-nowrap datatable table-bordered" id="table-admin">
                                 <thead>
                                     <tr>
                                         <th class="w-1">STT</th>

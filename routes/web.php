@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SelectLocationController;
 use App\Http\Controllers\Web\Admin\LocationController;
 use App\Http\Controllers\Web\Admin\ProfileController;
 use App\Http\Controllers\Web\Admin\AdminController;
@@ -11,9 +12,9 @@ use App\Http\Controllers\Web\Admin\PostTypeController;
 use App\Http\Controllers\Web\Admin\PropertyController;
 use App\Http\Controllers\Web\Admin\PropertyTypeController;
 use App\Http\Controllers\Web\Admin\SlideController;
-
+use App\Http\Controllers\Web\User\PageController;
 // use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
 // use phpDocumentor\Reflection\Location;
 // use Symfony\Component\HttpKernel\Profiler\Profile;
 
@@ -31,6 +32,20 @@ use App\Http\Controllers\Web\Admin\SlideController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+/**
+ * User
+ */
+Route::prefix('home')->group(function () {
+    Route::get('/', [PageController::class, 'Home'])->name('home');
+    Route::get('/contact', [PageController::class, 'showContact'])->name('show-contact');
+    Route::get('/about', [PageController::class, 'showAbout'])->name('show-about');
+    Route::get('/show-property/{id_category}',[PageController::class, 'showProperty'])->name('show-property');
+    Route::get('/show-auction/{id_property_type}', [PageController::class, 'showAuction'])->name('show-auction');
+    Route::get('/show-property-detail', [PageController::class, 'showPropertyDetail'])->name('show-property-detail');
+});
+/**
+ * Admin
+ */
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/registerMail', [AuthController::class, 'registerMail'])->name('register-mail');
 Route::get('/verifyRegisterMail/{mail_user}/{token}', [AuthController::class, 'verifyRegisterMail'])->name('verify-register-mail');
@@ -38,6 +53,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('/login-google', [AuthController::class, 'loginGoogle'])->name('login-google');
 Route::get('/google/callback', [AuthController::class, 'callbackGoogle'])->name('callback-google');
+Route::post('/select-location', [SelectLocationController::class, 'selectLocation'])->name('select-location');
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -65,13 +81,13 @@ Route::prefix('admin')->group(function () {
         Route::post('/add-news', [NewsController::class, 'addNews'])->name('add-news');
         Route::get('/update-news/{id_news}', [NewsController::class, 'showUpdateNews'])->name('show-update-news');
         Route::post('/update-news/{id_news}', [NewsController::class, 'updateNews'])->name('update-news');
-        Route::get('/delete/{id_news}',[NewsController::class, 'delete'])->name('delete-news');
+        Route::get('/delete/{id_news}', [NewsController::class, 'delete'])->name('delete-news');
     });
 
     Route::prefix('category')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('category-index');
         Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('add-category');
-        Route::get('/update-category/{id_category}',[CategoryController::class, 'showUpdateCategory'])->name('show-update-category');
+        Route::get('/update-category/{id_category}', [CategoryController::class, 'showUpdateCategory'])->name('show-update-category');
         Route::post('/update-category/{id_category}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
         Route::get('/delete-category/{id_category}', [CategoryController::class, 'delete'])->name('delete-category');
     });
@@ -88,21 +104,21 @@ Route::prefix('admin')->group(function () {
         Route::get('/add-district', [LocationController::class, 'showAddDistrict'])->name('show-add-district');
         Route::post('/add-district', [LocationController::class, 'addDistrict'])->name('add-district');
         Route::get('/update-district/{id_district}', [LocationController::class, 'showUpdateDistrict'])->name('show-update-district');
-        Route::post('/update-district/{id_district}',[LocationController::class, 'updateDistrict'])->name('update-district');
+        Route::post('/update-district/{id_district}', [LocationController::class, 'updateDistrict'])->name('update-district');
         Route::get('/delete-district/{id_district}', [LocationController::class, 'deleteDistrict'])->name('delete-district');
 
         Route::get('/ward', [LocationController::class, 'listWard'])->name('list-ward');
         Route::get('/add-ward', [LocationController::class, 'showAddWard'])->name('show-add-ward');
         Route::post('/add-ward', [LocationController::class, 'addWard'])->name('add-ward');
         Route::get('/update-ward/{id_ward}', [LocationController::class, 'showUpdateWard'])->name('show-update-ward');
-        Route::post('/update-ward/{id_ward}',[LocationController::class, 'updateWard'])->name('update-ward');
+        Route::post('/update-ward/{id_ward}', [LocationController::class, 'updateWard'])->name('update-ward');
         Route::get('/delete-ward/{id_ward}', [LocationController::class, 'deleteWard'])->name('delete-ward');
 
         Route::get('/street', [LocationController::class, 'listStreet'])->name('list-street');
         Route::get('/add-street', [LocationController::class, 'showAddStreet'])->name('show-add-street');
         Route::post('/add-street', [LocationController::class, 'addStreet'])->name('add-street');
         Route::get('/update-street/{id_street}', [LocationController::class, 'showUpdateStreet'])->name('show-update-street');
-        Route::post('/update-street/{id_street}',[LocationController::class, 'updateStreet'])->name('update-street');
+        Route::post('/update-street/{id_street}', [LocationController::class, 'updateStreet'])->name('update-street');
         Route::get('/delete-street/{id_street}', [LocationController::class, 'deleteStreet'])->name('delete-street');
 
         Route::get('/list-detail', [LocationController::class, 'listDetail'])->name('list-detail');
@@ -111,7 +127,7 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::prefix('directions')->group(function () {
-        Route::get('/',[DirectionsController::class, 'index'])->name('list-directions');
+        Route::get('/', [DirectionsController::class, 'index'])->name('list-directions');
         Route::get('/add-directions', [DirectionsController::class, 'showAddDirections'])->name('show-add-directions');
         Route::post('/add-directions', [DirectionsController::class, 'addDirections'])->name('add-directions');
         Route::get('/update-directions/{id_directions}', [DirectionsController::class, 'showUpdateDirections'])->name('show-update-directions');
@@ -120,7 +136,7 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::prefix('post-type')->group(function () {
-        Route::get('/',[PostTypeController::class, 'index'])->name('list-post-type');
+        Route::get('/', [PostTypeController::class, 'index'])->name('list-post-type');
         Route::get('/add-post-type', [PostTypeController::class, 'showAddPostType'])->name('show-add-post-type');
         Route::post('/add-post-type', [PostTypeController::class, 'addPostType'])->name('add-post-type');
         Route::get('/update-post-type/{id_post_type}', [PostTypeController::class, 'showUpdatePostType'])->name('show-update-post-type');
@@ -131,15 +147,20 @@ Route::prefix('admin')->group(function () {
     Route::prefix('property-type')->group(function () {
         Route::get('/', [PropertyTypeController::class, 'index'])->name('list-property-type');
         Route::post('/add-property-type', [PropertyTypeController::class, 'addPropertyType'])->name('add-property-type');
-        Route::get('/update-property-type/{id_property_type}',[PropertyTypeController::class, 'showUpdatePropertyType'])->name('show-update-property-type');
+        Route::get('/update-property-type/{id_property_type}', [PropertyTypeController::class, 'showUpdatePropertyType'])->name('show-update-property-type');
         Route::post('/update-property-type/{id_property_type}', [PropertyTypeController::class, 'updatePropertyType'])->name('update-property-type');
         Route::get('/delete-property-type/{id_property_type}', [PropertyTypeController::class, 'delete'])->name('delete-property-type');
+        Route::get('/lock-status/{id_property_type}', [PropertyTypeController::class, 'lockStatus'])->name('lock-status');
     });
 
     Route::prefix('property')->group(function () {
         Route::get('/', [PropertyController::class, 'index'])->name('list-property');
-        Route::post('/select-delivery', [PropertyController::class,'selectDelivery'])->name('select-delivery');
         Route::get('/add-property', [PropertyController::class, 'showAddProperty'])->name('show-add-property');
         Route::post('/add-property', [PropertyController::class, 'addProperty'])->name('add-property');
+        Route::get('/update-property/{id_property}', [PropertyController::class, 'showUpdateProperty'])->name('show-update-property');
+        Route::post('/update-property/{id_property}', [PropertyController::class, 'updateProperty'])->name('update-property');
+        Route::get('/delete-property/{id_property}', [PropertyController::class, 'delete'])->name('delete-property');
+        Route::get('/active-property/{id_property}', [PropertyController::class, 'activeProperty'])->name('active-property');
+        Route::get('/end-property/{id_property}', [PropertyController::class, 'endProperty'])->name('end-property');
     });
 });

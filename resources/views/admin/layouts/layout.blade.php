@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>Trang quản trị</title>
     <!-- CSS files -->
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
     <link href="{{ asset('frontend/dist/css/tabler.min.css') }}" rel="stylesheet" />
@@ -37,7 +37,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> --}}
     @yield('script')
 
-
     <script type="text/javascript">
     $(document).ready(function(){
         $('.choose').on('change',function(){
@@ -58,7 +57,7 @@
                 result = 'street';
             }
             $.ajax({
-                url : '{{ url('/admin/property/select-delivery') }}',
+                url : '{{ url('/select-location') }}',
                 method: 'POST',
                 data:{action:action,id:id,_token:_token},
                 success:function(data){

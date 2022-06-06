@@ -40,4 +40,11 @@ class PropertyTypeController extends Controller
         PropertyType::destroy($id_property_type);
         return redirect()->back()->with('message', 'Đã xoá loại hình');
     }
+
+    public function lockStatus($id_property_type){
+        $property_type = PropertyType::find($id_property_type);
+        $property_type->status = 1;
+        $property_type->update();
+        return redirect()->back()->with('message', 'Đã khoá loại hình bất động sản');
+    }
 }

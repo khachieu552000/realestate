@@ -22,10 +22,12 @@ class Property extends Model
         'bedrooms',
         'bathrooms',
         'juridical',
+        'start_date',
+        'end_date',
         'property_type_id',
         'direction_id',
         'account_id',
-        'catehories_id',
+        'categories_id',
         'street_id',
         'post_type_id',
         'status',
@@ -44,7 +46,7 @@ class Property extends Model
     }
 
     public function categories(){
-        return $this->belongsTo(Categories::class, 'categories_id');
+        return $this->belongsTo(Category::class, 'categories_id');
     }
 
     public function street(){

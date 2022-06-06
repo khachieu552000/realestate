@@ -16,11 +16,11 @@
         </div>
         <div class="container-xl">
             @if (session('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-        @endif
+                <div class="alert alert-success">{{ session('message') }}</div>
+            @endif
         </div>
         <div class="page-body">
-            <div class="container-xl">
+            <div class="container-xxl">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
@@ -40,8 +40,9 @@
                                 </div>
                             </div>
                         </div>
+                        @if (Session('login') || Auth::user()->role === 'user')
                         <div class="table-responsive">
-                            <table class="table card-table table-vcenter text-nowrap datatable table-bordered">
+                            <table class="table card-table table-vcenter text-wrap datatable table-bordered">
                                 <thead>
                                     <tr>
                                         <th class="w-1">STT</th>
@@ -52,29 +53,40 @@
                                         <th>Giá</th>
                                         <th>Diện tích</th>
                                         <th>Địa chỉ</th>
-                                        <th></th>
+                                        <th>Trạng thái</th>
                                         <th class="w-1">#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($post_type))
+                                    @if (isset($property_user))
                                         @php
                                             $index = 1;
                                         @endphp
-                                        @foreach ($post_type as $item)
+                                        @foreach ($property_user as $item)
                                             <tr>
                                                 <td><span class="text-muted">{{ $index++ }}</span></td>
                                                 <td>{{ $item->name }}</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $item->categories->name }}</td>
+                                                <td>{{ $item->investor }}</td>
+                                                <td><img src="{{ asset($item->image) }}" height="50" width="200"
+                                                        alt=""></td>
                                                 <td>{{ number_format($item->price) }} VNĐ</td>
+                                                <td>{{ $item->acreage }}</td>
+                                                <td>{{ $item->street->name }}, {{ $item->street->ward->name }}
+                                                </td>
+                                                <td>
+                                                    @if ($item->status === 'deactive')
+                                                    <b style="color: red">Chưa duyệt</b>
+                                                    @elseif ($item->status === 'active')
+                                                    <b style="color: green">Đã duyệt</b> |
+                                                    <a href="{{ route('end-property', ['id_property'=>$item->id]) }}" class="btn btn-primary w-20" href="">Kết thúc</a>
+                                                    @elseif ($item->status === 'end')
+                                                    <b style="color: orangered">Kết thúc</b>
+                                                    @endif
+                                                </td>
                                                 <td class="text-end">
-                                                    <a href="{{ route('show-update-post-type', ['id_post_type'=>$item->id]) }}" class="btn btn-primary w-20">Sửa</a>
-                                                    <a href="{{ route('delete-post-type', ['id_post_type'=>$item->id]) }}" class="btn btn-primary w-20">Xoá</a>
+                                                    <a href="{{ route('show-update-property', ['id_property' => $item->id]) }}"
+                                                        class="btn btn-primary w-20">Sửa</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -82,6 +94,63 @@
                                 </tbody>
                             </table>
                         </div>
+                        @elseif (Auth::user()->role === 'admin')
+                            <div class="table-responsive">
+                                <table class="table card-table table-vcenter text-wrap datatable table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="w-1">STT</th>
+                                            <th>Tên</th>
+                                            <th>Loại bất động sản</th>
+                                            <th>Chủ đầu tư</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Giá</th>
+                                            <th>Diện tích</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Duyệt</th>
+                                            <th class="w-1">#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (isset($property))
+                                            @php
+                                                $index = 1;
+                                            @endphp
+                                            @foreach ($property as $item)
+                                                <tr>
+                                                    <td><span class="text-muted">{{ $index++ }}</span></td>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ $item->categories->name }}</td>
+                                                    <td>{{ $item->investor }}</td>
+                                                    <td><img src="{{ asset($item->image) }}" height="50" width="200"
+                                                            alt=""></td>
+                                                    <td>{{ number_format($item->price) }} VNĐ</td>
+                                                    <td>{{ $item->acreage }}</td>
+                                                    <td>{{ $item->street->name }}, {{ $item->street->ward->name }}</td>
+                                                    <td>
+                                                        @if ($item->status === 'deactive')
+                                                            <a href="{{ route('active-property', ['id_property' => $item->id]) }}"
+                                                                class="btn btn-primary w-20">Duyệt</a>
+                                                        @elseif ($item->status === 'active')
+                                                            <b style="color: green">Đã duyệt</b> |
+                                                            <a href="{{ route('end-property', ['id_property'=>$item->id]) }}" class="btn btn-primary w-20" href="">Kết thúc</a>
+                                                        @elseif ($item->status === 'end')
+                                                        <b style="color: orangered">Kết thúc</b>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <a href="{{ route('show-update-property', ['id_property' => $item->id]) }}"
+                                                            class="btn btn-primary w-20">Sửa</a>
+                                                        <a href="{{ route('delete-property', ['id_property' => $item->id]) }}"
+                                                            class="btn btn-primary w-20">Xoá</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
                         <div class="card-footer d-flex align-items-center">
                             <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span> entries
                             </p>

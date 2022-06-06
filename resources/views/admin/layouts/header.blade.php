@@ -1,5 +1,5 @@
 <header class="navbar navbar-expand-md navbar-light d-print-none">
-    <div class="container-xl">
+    <div class="container-xxl">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,6 +9,85 @@
                     class="navbar-brand-image">
             </a>
         </h1>
+        @if ( Session('login') || Auth::user()->role === 'user')
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.index') }}">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <polyline points="5 12 3 12 12 3 21 12 19 12" />
+                            <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                            <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                        </svg>
+                    </span>
+                    <span class="nav-link-title">Trang chủ</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside" role="button" aria-expanded="false">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <rect x="4" y="4" width="6" height="5" rx="2" />
+                            <rect x="4" y="13" width="6" height="7" rx="2" />
+                            <rect x="14" y="4" width="6" height="7" rx="2" />
+                            <rect x="14" y="15" width="6" height="5" rx="2" />
+                        </svg>
+                    </span>
+                    <span class="nav-link-title">
+                        Bất động sản
+                    </span>
+                </a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-menu-columns">
+                        <div class="dropdown-menu-column">
+                            <a class="dropdown-item" href="{{ route('list-property') }}">
+                                Quản lý dự án
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside" role="button" aria-expanded="false">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M5 11a7 7 0 0 1 14 0v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-7" />
+                            <line x1="10" y1="10" x2="10.01" y2="10" />
+                            <line x1="14" y1="10" x2="14.01" y2="10" />
+                            <path d="M10 14a3.5 3.5 0 0 0 4 0" />
+                        </svg>
+                    </span>
+                    <span class="nav-link-title">
+                        Khách hàng
+                    </span>
+                </a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-menu-columns">
+                        <div class="dropdown-menu-column">
+                            <a class="dropdown-item" href="{{ route('category-index') }}">
+                                Quản lý khách hàng
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        @elseif (Auth::user()->role === 'admin')
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.index') }}">
@@ -113,7 +192,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" role="button" aria-expanded="false">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -154,8 +233,9 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./icons.html">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside" role="button" aria-expanded="false">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -173,8 +253,24 @@
                         Khách hàng
                     </span>
                 </a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-menu-columns">
+                        <div class="dropdown-menu-column">
+                            <a class="dropdown-item" href="{{ route('list-post-type') }}">
+                                Quản lý thành viên
+                            </a>
+                            <a class="dropdown-item" href="{{ route('list-property-type') }}">
+                                Hồ sơ người đấu giá
+                            </a>
+                            <a class="dropdown-item" href="{{ route('category-index') }}">
+                                Quản lý khách hàng
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </li>
         </ul>
+        @endif
         <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex">
                 <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode"
