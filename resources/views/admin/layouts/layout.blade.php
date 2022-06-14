@@ -7,12 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Trang quản trị</title>
     <!-- CSS files -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css" />
     <link href="{{ asset('frontend/dist/css/tabler.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/dist/css/tabler-flags.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/dist/css/tabler-payments.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/dist/css/demo.min.css') }}" rel="stylesheet" />
+
+    {{-- <link href="{{ asset('dataTables/css/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('dataTables/css/dataTables/dataTables.responsive.css') }}" rel="stylesheet"> --}}
 </head>
 
 <body class=" theme-light">
@@ -32,40 +35,54 @@
     <script src="{{ asset('frontend/dist/js/demo.min.js') }}" defer></script>
     <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- <script src="{{ asset('dataTables/js/dataTables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('dataTables/js/dataTables/dataTables.bootstrap.min.js') }}"></script> --}}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
+
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> --}}
     @yield('script')
 
+    <script>
+        $(document).ready(function() {
+            $('#table-admin').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+
     <script type="text/javascript">
-    $(document).ready(function(){
-        $('.choose').on('change',function(){
-            var action = $(this).attr('id');
-            var id = $(this).val();
-            var _token = $('input[name="_token"]').val();
-            var result = '';
-            // alert(action);
-            // alert(id);
-            // alert(_token);
-            if(action == 'provinces'){
-                result = 'district';
-            }
-            else if(action == 'district'){
-                result = 'ward';
-            }
-            else{
-                result = 'street';
-            }
-            $.ajax({
-                url : '{{ url('/select-location') }}',
-                method: 'POST',
-                data:{action:action,id:id,_token:_token},
-                success:function(data){
-                    $('#'+result).html(data);
+        $(document).ready(function() {
+            $('.choose').on('change', function() {
+                var action = $(this).attr('id');
+                var id = $(this).val();
+                var _token = $('input[name="_token"]').val();
+                var result = '';
+                // alert(action);
+                // alert(id);
+                // alert(_token);
+                if (action == 'provinces') {
+                    result = 'district';
+                } else if (action == 'district') {
+                    result = 'ward';
+                } else {
+                    result = 'street';
                 }
-        });
-        });
-    })
+                $.ajax({
+                    url: '{{ url('/select-location') }}',
+                    method: 'POST',
+                    data: {
+                        action: action,
+                        id: id,
+                        _token: _token
+                    },
+                    success: function(data) {
+                        $('#' + result).html(data);
+                    }
+                });
+            });
+        })
     </script>
 
     <script>

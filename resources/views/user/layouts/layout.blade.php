@@ -53,6 +53,7 @@
         @yield('content')
 		<!-- End Main -->
         @include('user.layouts.footer')
+        @extends('user.modal-contact')
 
 	</div>
 
@@ -74,6 +75,26 @@
 
 	<!-- Style Switcher -->
 	<script type="text/javascript" src="{{ asset('frontend/users/style-switcher/js/switcher.js') }}"></script>
+    @yield('script')
+    <script>
+        $('.btn-send').click(function(e) {
+            var url = $(this).attr('data-url');
+
+            $('#modal-auction').modal('show');
+            e.preventDefault();
+            $.ajax({
+                url: url,
+                type: 'get',
+
+                success: function(response) {
+                    $('#form-auction').attr('action', '{{ asset('home/auction/property/') }}/' + response.data.id)
+                },
+                error: function(error) {
+
+                }
+            })
+        })
+    </script>
 </body>
 
 <!-- Mirrored from pixelgeeklab.com/html/realestast/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 16 Aug 2015 08:54:11 GMT -->

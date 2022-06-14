@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\Admin\ProfileController;
 use App\Http\Controllers\Web\Admin\AdminController;
 use App\Http\Controllers\Web\Admin\AuthController;
 use App\Http\Controllers\Web\Admin\CategoryController;
+use App\Http\Controllers\Web\Admin\CustomerController;
 use App\Http\Controllers\Web\Admin\DirectionsController;
 use App\Http\Controllers\Web\Admin\NewsController;
 use App\Http\Controllers\Web\Admin\PostTypeController;
@@ -40,8 +41,12 @@ Route::prefix('home')->group(function () {
     Route::get('/contact', [PageController::class, 'showContact'])->name('show-contact');
     Route::get('/about', [PageController::class, 'showAbout'])->name('show-about');
     Route::get('/show-property/{id_category}',[PageController::class, 'showProperty'])->name('show-property');
-    Route::get('/show-auction/{id_property_type}', [PageController::class, 'showAuction'])->name('show-auction');
-    Route::get('/show-property-detail', [PageController::class, 'showPropertyDetail'])->name('show-property-detail');
+    Route::get('/auction/{id_property_type}', [PageController::class, 'showAuction'])->name('show-auction');
+    Route::get('/auction/property/{id_property}', [PageController::class, 'showAuctionProperty'])->name('show-auction-property');
+    Route::post('/auction/property/{id_property}', [PageController::class, 'auctionProperty'])->name('auction');
+    Route::get('/show-property-detail/{id_property}', [PageController::class, 'showPropertyDetail'])->name('show-property-detail');
+    Route::post('/customer-contact', [PageController::class, 'customerContact'])->name('customer-contact');
+    Route::get('/search', [PageController::class, 'search'])->name('search');
 });
 /**
  * Admin
@@ -54,7 +59,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('/login-google', [AuthController::class, 'loginGoogle'])->name('login-google');
 Route::get('/google/callback', [AuthController::class, 'callbackGoogle'])->name('callback-google');
 Route::post('/select-location', [SelectLocationController::class, 'selectLocation'])->name('select-location');
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/profile-information', [ProfileController::class, 'profileInformation'])->name('profile-information');
@@ -163,4 +168,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/active-property/{id_property}', [PropertyController::class, 'activeProperty'])->name('active-property');
         Route::get('/end-property/{id_property}', [PropertyController::class, 'endProperty'])->name('end-property');
     });
+
+    Route::get('list-member', [CustomerController::class, 'listMember'])->name('list-member');
+    Route::get('list-auctioneer', [CustomerController::class, 'listAuctioneer'])->name('list-auction');
+    Route::get('list-customer', [CustomerController::class, 'listCustomer'])->name('list-customer');
 });

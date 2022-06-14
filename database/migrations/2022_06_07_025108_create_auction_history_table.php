@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomerTable extends Migration
+class CreateAuctionHistoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateCustomerTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer', function (Blueprint $table) {
+        Schema::create('auction_history', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('email');
-            $table->text('phone');
-            $table->text('message')->nullable();
+            $table->double('price');
             $table->integer('property_id');
+            $table->integer('auctioneer_id');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateCustomerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer');
+        Schema::dropIfExists('auction_history');
     }
 }

@@ -28,7 +28,7 @@ class LocationExport implements FromView
     // }
     public function view(): View
     {
-           $location = Provinces::with('district.ward')->get();
+           $location = Provinces::with('district.ward.street')->get();
         return view('admin.location.export',compact('location'));
     }
 }

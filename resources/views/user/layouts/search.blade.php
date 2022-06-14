@@ -2,53 +2,41 @@
     <section class="pgl-advanced-search pgl-bg-light">
         <div class="container">
             <form name="advancedsearch">
+
                 <div class="row">
                     <div class="col-xs-6 col-sm-3">
                         <div class="form-group">
                             <label class="sr-only" for="property-status">Tỉnh/Thành phố</label>
-                            <select id="property-status" name="property-status" data-placeholder="Property Status" class="chosen-select">
-                                <option selected="selected" value="Property Status">Tỉnh/Thành phố</option>
-                                <option value="sale">For Sale</option>
-                                <option value="rent">For Rent</option>
+                            <select class="form-control choose provinces" name="provinces" id="provinces">
+                                <option value="">Chọn tỉnh/Thành phố</option>
+                                @foreach ($provinces as $province)
+                                    <option value="{{ $province->id }}">
+                                        {{ $province->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-3">
                         <div class="form-group">
-                            <label class="sr-only" for="location">Quận Huyện</label>
-                            <select id="location" name="location" data-placeholder="Location" class="chosen-select">
-                                <option selected="selected" value="Location">Quận/Huyện</option>
-                                <option value="United States">United States</option>
-                                <option value="United Kingdom">United Kingdom</option>
-                                <option value="Afghanistan">Afghanistan</option>
-                                <option value="Aland Islands">Aland Islands</option>
-                                <option value="Albania">Albania</option>
-                                <option value="Algeria">Algeria</option>
-                                <option value="American Samoa">American Samoa</option>
-                                <option value="Andorra">Andorra</option>
-                                <option value="Angola">Angola</option>
-                                <option value="Anguilla">Anguilla</option>
-                                <option value="Antarctica">Antarctica</option>
+                            <label class="sr-only" for="property-status">Quận/Huyện</label>
+                            <select class="form-control district choose" name="district" id="district">
+                                <option value="">Chọn quận/huyện</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-3">
                         <div class="form-group">
-                            <label class="sr-only" for="property-types">Phường/Xã</label>
-                            <select id="property-types" name="property-types" data-placeholder="Property Types" class="chosen-select">
-                                <option selected="selected" value="Property Types">Phường/Xã</option>
-                                <option value="residential">Residential</option>
-                                <option value="commercial">Commercial</option>
-                                <option value="land">Land</option>
+                            <label class="sr-only" for="property-status">Phường/Xã</label>
+                            <select class="form-control ward choose" name="ward" id="ward">
+                                <option value="">Chọn phường/xã</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-3">
                         <div class="form-group">
-                            <label class="sr-only" for="area-from">Đường/Phố</label>
-                            <select id="area-from" name="area-from" data-placeholder="Area From" class="chosen-select">
-                                <option selected="selected" value="Area From">Đường/Phố</option>
-                                <option value="450">450</option>
+                            <label class="sr-only" for="property-status">Đường/Phố</label>
+                            <select class="form-control" name="street" id="street">
+                                <option value="">Chọn đường/phố</option>
                             </select>
                         </div>
                     </div>
@@ -58,29 +46,24 @@
                     <div class="col-xs-6 col-sm-3">
                         <div class="form-group">
                             <label class="sr-only" for="search-bedrooms">Danh mục</label>
-                            <select id="search-bedrooms" name="search-bedrooms" data-placeholder="Bedrooms" class="chosen-select">
-                                <option selected="selected" value="Bedrooms">Danh mục bất động sản</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="5plus">5+</option>
+                            <select id="search-bedrooms" name="search-bedrooms" data-placeholder="Bedrooms"
+                                class="chosen-select">
+                                <option selected="selected" value="Bedrooms">Danh mục</option>
+                                @foreach ($category as $cate)
+                                <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-3">
                         <div class="form-group">
-                            <label class="sr-only" for="search-bathrooms">Loại hình bất động sản</label>
-                            <select id="search-bathrooms" name="search-bathrooms" data-placeholder="Bathrooms" class="chosen-select">
-                                <option selected="selected" value="Bathrooms">Loại hình bất động sản</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="4plus">4+</option>
+                            <label class="sr-only" for="search-bathrooms">Hình thức</label>
+                            <select id="search-bathrooms" name="search-bathrooms" data-placeholder="Bathrooms"
+                                class="chosen-select">
+                                <option selected="selected" value="Bathrooms">Hình thức</option>
+                                @foreach ($property_type as $pt)
+                                <option value="{{ $pt->id }}">{{ $pt->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -89,36 +72,36 @@
                             <div class="row pgl-narrow-row">
                                 <div class="col-xs-6">
                                     <label class="sr-only" for="search-minprice">Diện tích</label>
-                                    <select id="search-minprice" name="search-minprice" data-placeholder="Price From" class="chosen-select">
+                                    <select id="search-minprice" name="search-minprice" data-placeholder="Price From"
+                                        class="chosen-select">
                                         <option selected="selected" value="Price From">Diện tích</option>
-                                        <option value="0">$0</option>
-                                        <option value="25000">$25000</option>
-                                        <option value="50000">$50000</option>
-                                        <option value="75000">$75000</option>
-                                        <option value="100000">$100000</option>
-                                        <option value="150000">$150000</option>
-                                        <option value="200000">$200000</option>
-                                        <option value="300000">$300000</option>
-                                        <option value="500000">$500000</option>
-                                        <option value="750000">$750000</option>
-                                        <option value="1000000">$1000000</option>
+                                        <option value="30"> <= 30 <sup>m2</sup></option>
+                                        <option value="31">30 - 50 <sup>m2</sup></option>
+                                        <option value="51">50 - 100 <sup>m2</sup></option>
+                                        <option value="101">100 - 150 <sup>m2</sup></option>
+                                        <option value="151">150 - 200 <sup>m2</sup></option>
+                                        <option value="201">200 - 250 <sup>m2</sup></option>
+                                        <option value="251">250 - 300 <sup>m2</sup></option>
+                                        <option value="301">300 - 500 <sup>m2</sup></option>
+                                        <option value="501">> 500 <sup>m2</sup></option>
+
                                     </select>
                                 </div>
                                 <div class="col-xs-6">
                                     <label class="sr-only" for="search-maxprice">Mức giá</label>
-                                    <select id="search-maxprice" name="search-maxprice" data-placeholder="Price To" class="chosen-select">
+                                    <select id="search-maxprice" name="search-maxprice" data-placeholder="Price To"
+                                        class="chosen-select">
                                         <option selected="selected" value="Price To">Mức giá</option>
-                                        <option value="25000">$25000</option>
-                                        <option value="50000">$50000</option>
-                                        <option value="75000">$75000</option>
-                                        <option value="100000">$100000</option>
-                                        <option value="150000">$150000</option>
-                                        <option value="200000">$200000</option>
-                                        <option value="300000">$300000</option>
-                                        <option value="500000">$500000</option>
-                                        <option value="750000">$750000</option>
-                                        <option value="1000000">$1000000</option>
-                                        <option value="1000000plus">>$1000000</option>
+                                        <option value="500"> <= 500 triệu</option>
+                                        <option value="501">500 triệu - 1 tỷ</option>
+                                        <option value="1">1 - 2 tỷ</option>
+                                        <option value="2">2 - 3 tỷ</option>
+                                        <option value="3">3 - 5 tỷ</option>
+                                        <option value="5">5 - 7 tỷ</option>
+                                        <option value="7">7 - 10 tỷ</option>
+                                        <option value="10">10 - 20 tỷ</option>
+                                        <option value="20">20 - 30 tỷ</option>
+                                        <option value="30">> 30 tỷ</option>
                                     </select>
                                 </div>
                             </div>
@@ -135,3 +118,37 @@
         </div>
     </section>
     <!-- End Advanced Search -->
+    @section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.choose').on('change', function() {
+                var action = $(this).attr('id');
+                var id = $(this).val();
+                var _token = $('input[name="_token"]').val();
+                var result = '';
+                // alert(action);
+                // alert(id);
+                // alert(_token);
+                if (action == 'provinces') {
+                    result = 'district';
+                } else if (action == 'district') {
+                    result = 'ward';
+                } else {
+                    result = 'street';
+                }
+                $.ajax({
+                    url: '{{ url('/select-location') }}',
+                    method: 'POST',
+                    data: {
+                        action: action,
+                        id: id,
+                        _token: _token
+                    },
+                    success: function(data) {
+                        $('#' + result).html(data);
+                    }
+                });
+            });
+        })
+    </script>
+    @endsection

@@ -256,13 +256,13 @@
                 <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="{{ route('list-post-type') }}">
+                            <a class="dropdown-item" href="{{ route('list-member') }}">
                                 Quản lý thành viên
                             </a>
-                            <a class="dropdown-item" href="{{ route('list-property-type') }}">
+                            <a class="dropdown-item" href="{{ route('list-auction') }}">
                                 Hồ sơ người đấu giá
                             </a>
-                            <a class="dropdown-item" href="{{ route('category-index') }}">
+                            <a class="dropdown-item" href="{{ route('list-customer') }}">
                                 Quản lý khách hàng
                             </a>
                         </div>

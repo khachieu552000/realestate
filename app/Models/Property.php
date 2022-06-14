@@ -34,7 +34,7 @@ class Property extends Model
     ];
 
     public function directions(){
-        return $this->belongsTo(Directions::class, 'direction_id');
+        return $this->belongsTo(Direction::class, 'direction_id');
     }
 
     public function juridical(){
@@ -59,5 +59,13 @@ class Property extends Model
 
     public function property_type(){
         return $this->belongsTo(PropertyType::class, 'property_type_id');
+    }
+
+    public function auction_history(){
+        return $this->hasMany(AuctionHistory::class, 'property_id');
+    }
+
+    public function customer(){
+        return $this->belongsToMany(Customer::class, 'property_id');
     }
 }

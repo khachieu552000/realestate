@@ -8,7 +8,7 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Danh sách hướng nhà
+                            Danh sách đấu giá
                         </h2>
                     </div>
                 </div>
@@ -23,38 +23,48 @@
             <div class="container-xxl">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <div class="card-body py-1">
                                 <div class="d-flex">
                                     <div class="text-muted">
-                                        <a href="{{ route('show-add-directions') }}" class="btn btn-primary w-100">Thêm
+                                        <a href="" class="btn btn-primary w-100">Thêm
                                             mới</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="table-responsive">
                             <table class="table card-table table-vcenter text-nowrap datatable table-bordered" id="table-admin">
                                 <thead>
                                     <tr>
                                         <th class="w-1">STT</th>
+                                        <th>Dự án</th>
                                         <th>Tên</th>
-                                        <th class="w-1">#</th>
+                                        <th>CCCD/CMND</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Điện thoại</th>
+                                        <th>Số tiền</th>
+                                        {{-- <th class="w-1">#</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($directions))
+                                    @if (isset($list_auctioneer))
                                         @php
                                             $index = 1;
                                         @endphp
-                                        @foreach ($directions as $item)
+                                        @foreach ($list_auctioneer as $list)
                                             <tr>
                                                 <td><span class="text-muted">{{ $index++ }}</span></td>
-                                                <td>{{ $item->name }}</td>
-                                                <td class="text-end">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                {{-- <td class="text-end">
                                                     <a href="{{ route('show-update-directions', ['id_directions'=>$item->id]) }}" class="btn btn-primary w-20">Sửa</a>
                                                     <a href="{{ route('delete-directions', ['id_directions'=>$item->id]) }}" class="btn btn-primary w-20">Xoá</a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     @endif

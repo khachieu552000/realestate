@@ -20,7 +20,7 @@ class CreatePropertyTable extends Migration
             $table->string('address')->nullable();
             $table->text('image')->nullable();
             $table->text('description');
-            $table->float('price');
+            $table->double('price');
             $table->string('acreage');
             $table->bigInteger('floors')->nullable();
             $table->bigInteger('bedrooms')->nullable();

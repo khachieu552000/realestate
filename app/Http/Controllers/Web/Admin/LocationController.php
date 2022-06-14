@@ -18,19 +18,22 @@ class LocationController extends Controller
      * CRUD Provinces
      */
 
-    public function listProvinces(){
-        $provinces = Provinces::orderBy('id','asc')->get();
+    public function listProvinces()
+    {
+        $provinces = Provinces::orderBy('id', 'asc')->get();
         return view('admin.location.provinces.index', compact('provinces'));
     }
 
-    public function showAddProvinces(){
+    public function showAddProvinces()
+    {
         return view('admin.location.provinces.add');
     }
 
-    public function addProvinces(Request $request){
+    public function addProvinces(Request $request)
+    {
         $this->validate($request, [
             'name_provinces' => 'required',
-        ],[
+        ], [
             'name_provinces.required' => 'Vui lòng nhập tên tỉnh/thành phố',
         ]);
 
@@ -40,15 +43,17 @@ class LocationController extends Controller
         return redirect()->back()->with('message', 'Đã thêm mới tỉnh/thành phố');
     }
 
-    public function showUpdateProvinces($id_provinces){
+    public function showUpdateProvinces($id_provinces)
+    {
         $provinces = Provinces::find($id_provinces);
-        return view('admin.location.provinces.update',compact('provinces'));
+        return view('admin.location.provinces.update', compact('provinces'));
     }
 
-    public function updateProvinces(Request $request, $id_provinces){
+    public function updateProvinces(Request $request, $id_provinces)
+    {
         $this->validate($request, [
             'name_provinces' => 'required',
-        ],[
+        ], [
             'name_provinces.required' => 'Vui lòng nhập tên tỉnh/thành phố',
         ]);
 
@@ -58,13 +63,14 @@ class LocationController extends Controller
         return redirect()->route('list-provinces')->with('message', 'Đã cập nhật tỉnh/thành phố');
     }
 
-    public function deleteProvinces($id_provinces){
+    public function deleteProvinces($id_provinces)
+    {
         $provinces = Provinces::with('district.ward.street')->find($id_provinces);
-        foreach($provinces->district as $district){
+        foreach ($provinces->district as $district) {
             $district->delete();
-            foreach($district->ward as $ward){
+            foreach ($district->ward as $ward) {
                 $ward->delete();
-                foreach($ward->street as $street){
+                foreach ($ward->street as $street) {
                     $street->delete();
                 }
             }
@@ -77,21 +83,24 @@ class LocationController extends Controller
      * CRUD District
      */
 
-    public function listDistrict(){
+    public function listDistrict()
+    {
         $district = District::orderBy('id', 'asc')->get();
-        return view('admin.location.district.index',compact('district'));
+        return view('admin.location.district.index', compact('district'));
     }
 
-    public function showAddDistrict(){
+    public function showAddDistrict()
+    {
         $provinces = Provinces::all();
         return view('admin.location.district.add', compact('provinces'));
     }
 
-    public function addDistrict(Request $request){
+    public function addDistrict(Request $request)
+    {
         $this->validate($request, [
             'provinces' => 'required',
             'name_district' => 'required',
-        ],[
+        ], [
             'provinces.required' => 'Vui lòng chọn tỉnh/thành phố',
             'name_district.required' => 'Vui lòng nhập tên quận/huyện',
         ]);
@@ -103,17 +112,19 @@ class LocationController extends Controller
         return redirect()->back()->with('message', 'Đã thêm mới quận/huyện');
     }
 
-    public function showUpdateDistrict($id_district){
+    public function showUpdateDistrict($id_district)
+    {
         $district = District::find($id_district);
         $provinces = Provinces::all();
-        return view('admin.location.district.update',compact('district','provinces'));
+        return view('admin.location.district.update', compact('district', 'provinces'));
     }
 
-    public function updateDistrict(Request $request, $id_district){
+    public function updateDistrict(Request $request, $id_district)
+    {
         $this->validate($request, [
             'provinces' => 'required',
             'name_district' => 'required',
-        ],[
+        ], [
             'provinces.required' => 'Vui lòng chọn tỉnh/thành phố',
             'name_district.required' => 'Vui lòng nhập tên quận/huyện',
         ]);
@@ -125,11 +136,12 @@ class LocationController extends Controller
         return redirect()->route('list-district')->with('message', 'Đã câp nhật quận/huyện');
     }
 
-    public function deleteDistrict($id_district){
+    public function deleteDistrict($id_district)
+    {
         $district = District::with('ward.street')->find($id_district);
-        foreach($district->ward as $ward){
+        foreach ($district->ward as $ward) {
             $ward->delete();
-            foreach($ward->street as $street){
+            foreach ($ward->street as $street) {
                 $street->delete();
             }
         }
@@ -141,21 +153,24 @@ class LocationController extends Controller
      * CRUD Ward
      */
 
-    public function listWard(){
-        $ward = Ward::orderBy('id','asc')->get();
+    public function listWard()
+    {
+        $ward = Ward::orderBy('id', 'asc')->get();
         return view('admin.location.ward.index', compact('ward'));
     }
 
-    public function showAddWard(){
+    public function showAddWard()
+    {
         $district = District::all();
-        return view('admin.location.ward.add',compact('district'));
+        return view('admin.location.ward.add', compact('district'));
     }
 
-    public function addWard(Request $request){
+    public function addWard(Request $request)
+    {
         $this->validate($request, [
             'district' => 'required',
             'name_ward' => 'required',
-        ],[
+        ], [
             'district.required' => 'Vui lòng chọn quận/huyện',
             'name_ward.required' => 'Vui lòng nhập tên phường/xã',
         ]);
@@ -167,17 +182,19 @@ class LocationController extends Controller
         return redirect()->back()->with('message', 'Đã thêm mới phường/xã');
     }
 
-    public function showUpdateWard($id_ward){
+    public function showUpdateWard($id_ward)
+    {
         $ward = Ward::find($id_ward);
         $district = District::all();
         return view('admin.location.ward.update', compact('ward', 'district'));
     }
 
-    public function updateWard(Request $request, $id_ward){
+    public function updateWard(Request $request, $id_ward)
+    {
         $this->validate($request, [
             'district' => 'required',
             'name_ward' => 'required',
-        ],[
+        ], [
             'district.required' => 'Vui lòng chọn quận/huyện',
             'name_ward.required' => 'Vui lòng nhập tên phường/xã',
         ]);
@@ -189,9 +206,10 @@ class LocationController extends Controller
         return redirect()->route('list-ward')->with('message', 'Đã cập nhật phường/xã');
     }
 
-    public function deleteWard($id_ward){
+    public function deleteWard($id_ward)
+    {
         $ward = Ward::with('street')->find($id_ward);
-        foreach($ward->street as $street){
+        foreach ($ward->street as $street) {
             $street->delete();
         }
         $ward->delete();
@@ -202,21 +220,24 @@ class LocationController extends Controller
      * CRUD Street
      */
 
-    public function listStreet(){
-        $street = Street::orderBy('id','asc')->get();
+    public function listStreet()
+    {
+        $street = Street::orderBy('id', 'asc')->get();
         return view('admin.location.street.index', compact('street'));
     }
 
-    public function showAddStreet(){
+    public function showAddStreet()
+    {
         $ward = Ward::all();
         return view('admin.location.street.add', compact('ward'));
     }
 
-    public function addStreet(Request $request){
+    public function addStreet(Request $request)
+    {
         $this->validate($request, [
             'ward' => 'required',
             'name_street' => 'required',
-        ],[
+        ], [
             'ward.required' => 'Vui lòng chọn phường/xã',
             'name_street.required' => 'Vui lòng nhập tên đường/phố',
         ]);
@@ -228,17 +249,19 @@ class LocationController extends Controller
         return redirect()->back()->with('message', 'Đã thêm đường/phố');
     }
 
-    public function showUpdateStreet($id_street){
+    public function showUpdateStreet($id_street)
+    {
         $ward = Ward::all();
         $street = Street::find($id_street);
         return view('admin.location.street.update', compact('ward', 'street'));
     }
 
-    public function updateStreet(Request $request, $id_street){
+    public function updateStreet(Request $request, $id_street)
+    {
         $this->validate($request, [
             'ward' => 'required',
             'name_street' => 'required',
-        ],[
+        ], [
             'ward.required' => 'Vui lòng chọn phường/xã',
             'name_street.required' => 'Vui lòng nhập tên đường/phố',
         ]);
@@ -250,18 +273,21 @@ class LocationController extends Controller
         return redirect()->route('list-street')->with('message', 'Đã cập nhật đường/phố');
     }
 
-    public function deleteStreet($id_street){
+    public function deleteStreet($id_street)
+    {
         $street = Street::find($id_street);
         $street->delete();
         return redirect()->back()->with('message', 'Đã xoá đường/phố');
     }
 
-    public function listDetail(){
-        $location = Provinces::with('district.ward')->get();
-        return view('admin.location.list-detail',compact('location'));
+    public function listDetail()
+    {
+        $location = Provinces::with('district.ward.street')->get();
+        return view('admin.location.list-detail', compact('location'));
     }
 
-    public function exportLocation(){
+    public function exportLocation()
+    {
         return Excel::download(new LocationExport(), 'location.xlsx');
     }
 
@@ -269,8 +295,9 @@ class LocationController extends Controller
      * In Progress
      */
 
-    public function importLocation(Request $request){
-        $this->validate($request,[
+    public function importLocation(Request $request)
+    {
+        $this->validate($request, [
             'file_location' => 'required',
         ]);
         // $path = $request->file('file_location')->getRealPath();
@@ -278,5 +305,4 @@ class LocationController extends Controller
         Excel::import(new LocationImport, $request->file('file_location'));
         return redirect()->back()->with('message', 'success');
     }
-
 }

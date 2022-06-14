@@ -24,14 +24,26 @@
                             <td>{{ $district->name }}</td>
                         </tr>
                     @else
-                        @foreach ($district->ward as $ward)
-                            <tr>
-                                <td> {{ $index++ }}</td>
-                                <td>{{ $provinces->name }}</td>
-                                <td>{{ $district->name }}</td>
-                                <td>{{ $ward->name }}</td>
-                            </tr>
-                        @endforeach
+                    @foreach ($district->ward as $ward)
+                    @if (count($ward->street) == 0)
+                    <tr>
+                        <td> {{ $index++ }}</td>
+                        <td>{{ $provinces->name }}</td>
+                        <td>{{ $district->name }}</td>
+                        <td>{{ $ward->name }}</td>
+                    </tr>
+                    @else
+                    @foreach ($ward->street as $street)
+                    <tr>
+                        <td> {{ $index++ }}</td>
+                        <td>{{ $provinces->name }}</td>
+                        <td>{{ $district->name }}</td>
+                        <td>{{ $ward->name }}</td>
+                        <td>{{ $street->name }}</td>
+                    </tr>
+                    @endforeach
+                    @endif
+                    @endforeach
                     @endif
                 @endforeach
                 {{-- <td>{{ $ward->district->provinces?$ward->district->provinces->name:' ' }}</td>

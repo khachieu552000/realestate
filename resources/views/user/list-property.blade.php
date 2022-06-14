@@ -17,7 +17,7 @@
 
     <section class="pgl-properties pgl-bg-grey">
         <div class="container">
-            <h2>{{ $category->name }}</h2>
+            <h2>{{ $category_find_id->name }}</h2>
             <div class="properties-full properties-listing properties-listfull">
                 @foreach ($property as $item)
                 <div class="pgl-property animation">

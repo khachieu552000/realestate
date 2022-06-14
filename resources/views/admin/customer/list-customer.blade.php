@@ -8,7 +8,7 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Danh sách hướng nhà
+                            Danh sách thành viên
                         </h2>
                     </div>
                 </div>
@@ -23,16 +23,16 @@
             <div class="container-xxl">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <div class="card-body py-1">
                                 <div class="d-flex">
                                     <div class="text-muted">
-                                        <a href="{{ route('show-add-directions') }}" class="btn btn-primary w-100">Thêm
+                                        <a href="" class="btn btn-primary w-100">Thêm
                                             mới</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="table-responsive">
                             <table class="table card-table table-vcenter text-nowrap datatable table-bordered" id="table-admin">
                                 <thead>
