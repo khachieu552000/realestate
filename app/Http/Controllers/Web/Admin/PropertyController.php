@@ -28,15 +28,12 @@ class PropertyController extends Controller
 
     public function index(){
         $property = Property::orderBy('id','asc')->get();
-        // dd(Session('id'));
         if(Session('login')){
         $property_user = Property::where('account_id', Session('id'))->get();
         }
         else if(Auth::user()){
             $property_user = Property::where('account_id', Auth::user()->id)->get();
         }
-        // dd($property_user);
-        // dd($property_user);
         return view('admin.property.index', compact('property', 'property_user'));
     }
 

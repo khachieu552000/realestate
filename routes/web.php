@@ -14,6 +14,7 @@ use App\Http\Controllers\Web\Admin\PropertyController;
 use App\Http\Controllers\Web\Admin\PropertyTypeController;
 use App\Http\Controllers\Web\Admin\SlideController;
 use App\Http\Controllers\Web\User\PageController;
+use App\Http\Controllers\Web\User\SearchController;
 // use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 // use phpDocumentor\Reflection\Location;
@@ -45,8 +46,10 @@ Route::prefix('home')->group(function () {
     Route::get('/auction/property/{id_property}', [PageController::class, 'showAuctionProperty'])->name('show-auction-property');
     Route::post('/auction/property/{id_property}', [PageController::class, 'auctionProperty'])->name('auction');
     Route::get('/show-property-detail/{id_property}', [PageController::class, 'showPropertyDetail'])->name('show-property-detail');
-    Route::post('/customer-contact', [PageController::class, 'customerContact'])->name('customer-contact');
-    Route::get('/search', [PageController::class, 'search'])->name('search');
+
+    Route::get('/customer-contact/{id_property}', [PageController::class, 'showCustomerContact'])->name('show-customer-contact');
+    Route::post('/customer-contact/{id_property}', [PageController::class, 'customerContact'])->name('customer-contact');
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
 });
 /**
  * Admin

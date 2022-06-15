@@ -7,7 +7,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title">Yêu cầu liên hệ</h3>
         </div>
-        <form role="form" method="post" action="{{ route('customer-contact') }}">
+        <form role="form" method="POST" action="" id="form-contact">
             @csrf
             <div class="modal-body">
                 <div class="form-group">

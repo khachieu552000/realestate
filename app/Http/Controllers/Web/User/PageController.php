@@ -77,15 +77,23 @@ class PageController extends Controller
         $provinces = Provinces::all();
         $category = Category::all();
         $property_type = PropertyType::all();
-        $max_price = AuctionHistory::with('auctioneer_profile')
-            ->orderBy('price', 'desc')
-            ->orderBy('updated_at', 'asc')
-            ->first();
-        // dd($max_price->auctioneer_profile->name);
         $property = Property::where('property_type_id', $id_property_type)
             ->where('status', 'active')
             ->get();
-        return view('user.list-auction', compact('property', 'max_price', 'date', 'provinces', 'category', 'property_type'));
+        foreach ($property as $pr) {
+            $max_price = AuctionHistory::with('auctioneer_profile')
+                ->orderBy('price', 'desc')
+                ->orderBy('updated_at', 'asc')
+                ->find($pr->id);
+            // dd($max_price);
+            return view('user.list-auction', compact('property', 'max_price', 'date', 'provinces', 'category', 'property_type'));
+        }
+
+        // dd($max_price->auctioneer_profile->name);
+        // $property = Property::where('property_type_id', $id_property_type)
+        //     ->where('status', 'active')
+        //     ->get();
+
     }
 
     public function showAuctionProperty($id_property)
@@ -96,61 +104,60 @@ class PageController extends Controller
 
     public function auctionProperty(Request $request, $id_property)
     {
-        $auctioneer = AuctionHistory::with('auctioneer_profile')->where('property_id', $id_property)->get();
-        if (isset($auctioneer)) {
-            foreach ($auctioneer as $item) {
-                // dd($item->auctioneer_profile->citizen_identification);
-                if (strcmp($item->auctioneer_profile->citizen_identification, $request->citizen_identification) === 0) {
-                    $auctioneer = AuctioneerProfile::where('citizen_identification', $request->citizen_identification)->first();
-                    $auction_history = AuctionHistory::where('auctioneer_id', $auctioneer->id)->first();
-                    // dd($auction_history);
-                    // // dd($auctioneer->auctioneer_history);
-                    $auction_history->price = $request->price;
-                    $auction_history->update();
-                    return redirect()->back()->with('message', 'Bạn đã thay đổi mức giá của mình');
-                } else {
-
-                    $property = Property::find($id_property);
-                    $auctioneer = new AuctioneerProfile();
-                    $auctioneer->name = $request->name;
-                    $auctioneer->citizen_identification = $request->citizen_identification;
-                    $auctioneer->phone = $request->phone;
-                    $auctioneer->address = $request->address;
-                    $auctioneer->save();
-
-                    $auction_history = new AuctionHistory();
-                    $auction_history->price = $request->price;
-                    $auction_history->property_id = $property->id;
-                    $auction_history->auctioneer_id = $auctioneer->id;
-                    $auction_history->save();
-                    return redirect()->back()->with('message', 'Chúc mừng bạn đã tham gia đấu giá đấu giá thành công');
+        $property = Property::find($id_property);
+        $history = AuctionHistory::all();
+        foreach ($history as $history) {
+        }
+        if ($property->id === $history->property_id) {
+            $auctioneer = AuctionHistory::with('auctioneer_profile')->where('property_id', $id_property)->get();
+            if (isset($auctioneer)) {
+                foreach ($auctioneer as $item) {
+                    // dd($item->auctioneer_profile->citizen_identification);
+                    if (strcmp($item->auctioneer_profile->citizen_identification, $request->citizen_identification) === 0) {
+                        $auctioneer = AuctioneerProfile::where('citizen_identification', $request->citizen_identification)->first();
+                        $auction_history = AuctionHistory::where('auctioneer_id', $auctioneer->id)->first();
+                        // dd($auction_history);
+                        // // dd($auctioneer->auctioneer_history);
+                        $auction_history->price = $request->price;
+                        $auction_history->update();
+                        return redirect()->back()->with('message', 'Bạn đã thay đổi mức giá của mình');
+                    } else {
+                        $property = Property::find($id_property);
+                        AuctioneerProfile::createAuctionProfile($request, $property);
+                        return redirect()->back()->with('message', 'Chúc mừng bạn đã tham gia đấu giá đấu giá thành công');
+                    }
                 }
+            } else {
+                $property = Property::find($id_property);
+                AuctioneerProfile::createAuctionProfile($request, $property);
+                return redirect()->back()->with('message', 'Chúc mừng bạn đã tham gia đấu giá đấu giá thành công');
             }
         } else {
             $property = Property::find($id_property);
-            $auctioneer = new AuctioneerProfile();
-            $auctioneer->name = $request->name;
-            $auctioneer->citizen_identification = $request->citizen_identification;
-            $auctioneer->phone = $request->phone;
-            $auctioneer->address = $request->address;
-            $auctioneer->save();
-
-            $auction_history = new AuctionHistory();
-            $auction_history->price = $request->price;
-            $auction_history->property_id = $property->id;
-            $auction_history->auctioneer_id = $auctioneer->id;
-            $auction_history->save();
+            AuctioneerProfile::createAuctionProfile($request, $property);
             return redirect()->back()->with('message', 'Chúc mừng bạn đã tham gia đấu giá đấu giá thành công');
         }
     }
 
     public function showPropertyDetail($id_property)
     {
+        $date = Carbon::now()->toDateString();
         $property = Property::find($id_property);
-        return view('user.property-detail', compact('property'));
+        $similar_property = Property::where('property_type_id', $property->property_type_id)->get();
+        $max_price = AuctionHistory::with('auctioneer_profile')->where('property_id', $id_property)
+            ->orderBy('price', 'desc')
+            ->orderBy('updated_at', 'asc')
+            ->first();
+        return view('user.property-detail', compact('property', 'max_price', 'date', 'similar_property'));
     }
 
-    public function customerContact(Request $request)
+    public function showCustomerContact($id_property)
+    {
+        $property = Property::find($id_property);
+        return response()->json(['data' => $property], 200);
+    }
+
+    public function customerContact(Request $request, $id_property)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -163,18 +170,15 @@ class PageController extends Controller
             'phone.required' => 'Vui lòng nhập số điện thoại',
             'message.required' => 'Vui lòng nhập lời nhắn',
         ]);
+        $property = Property::find($id_property);
         $contact_customer = new Customer();
         $contact_customer->name = $request->name;
         $contact_customer->email = $request->email;
         $contact_customer->phone = $request->phone;
         $contact_customer->message = $request->message;
+        $contact_customer->property_id = $property->id;
         $contact_customer->save();
         return redirect()->back()->with('message', 'Đã gửi yêu cầu liên hệ');
     }
 
-    public function search()
-    {
-
-        return view('user.layouts.search');
-    }
 }

@@ -42,7 +42,7 @@
 
                                             <div class="property-thumb-info-content">
                                                 <h3 style="font-size: 22px; font-weight: 600;"><a
-                                                        href="property-detail.html">{{ $item->name }}</a></h3>
+                                                        href="{{ route('show-property-detail', ['id_property'=>$item->id]) }}">{{ $item->name }}</a></h3>
                                                 <h4>
                                                     @if ($item->status === 'end')
                                                         Đã hết
@@ -97,7 +97,7 @@
                 @endif
             </div>
         </section>
-        @extends('user.modal-auction')
+        @include('user.modal-auction')
         <!-- End Properties -->
 
     </div>

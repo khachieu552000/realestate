@@ -173,114 +173,35 @@
                         <div class="row">
                             <div class="owl-carousel pgl-pro-slide"
                                 data-plugin-options='{"items": 3, "itemsDesktop": 3, "singleItem": false, "autoPlay": false, "pagination": false}'>
+                                @foreach ($similar_property as $sp)
                                 <div class="col-md-12 animation">
                                     <div class="pgl-property">
                                         <div class="property-thumb-info">
                                             <div class="property-thumb-info-image">
-                                                <img alt="" class="img-responsive" src="images/properties/property-1.jpg">
+                                                <img alt="" class="img-responsive" src="{{ asset($sp->image) }}">
                                                 <span class="property-thumb-info-label">
-                                                    <span class="label price">$358,000</span>
-                                                    <span class="label forrent">Rent</span>
+                                                    <span class="label price">{{ number_format($sp->price) }} vnđ</span>
+                                                    <span class="label forrent">{{ $sp->property_type->name }}</span>
                                                 </span>
                                             </div>
                                             <div class="property-thumb-info-content">
-                                                <h3><a href="property-detail.html">Poolside character home on a wide
-                                                        422sqm</a></h3>
-                                                <address>Ferris Park, Jersey City Land in Sales</address>
+                                                <h3><a href="property-detail.html">{{ $sp->name }}</a></h3>
+                                                <address>{{ $sp->street->name }}, {{ $sp->street->ward->name }}, {{ $sp->street->ward->district->name }}, {{ $sp->street->ward->district->provinces->name }}</address>
                                             </div>
                                             <div class="amenities clearfix">
                                                 <ul class="pull-left">
-                                                    <li><strong>Area:</strong> 450<sup>m2</sup></li>
+                                                    <li><strong>Diện tích</strong> {{ $sp->acreage }}<sup>m2</sup></li>
                                                 </ul>
                                                 <ul class="pull-right">
-                                                    <li><i class="icons icon-bedroom"></i> 3</li>
-                                                    <li><i class="icons icon-bathroom"></i> 2</li>
+                                                    <li><i class="icons icon-bedroom"></i> {{ $sp->bedrooms }}</li>
+                                                    <li><i class="icons icon-bathroom"></i> {{ $sp->bathrooms }}</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 animation">
-                                    <div class="pgl-property">
-                                        <div class="property-thumb-info">
-                                            <div class="property-thumb-info-image">
-                                                <img alt="" class="img-responsive" src="images/properties/property-2.jpg">
-                                                <span class="property-thumb-info-label">
-                                                    <span class="label price">$358,000</span>
-                                                    <span class="label forrent">Rent</span>
-                                                </span>
-                                            </div>
-                                            <div class="property-thumb-info-content">
-                                                <h3><a href="property-detail.html">Poolside character home on a wide
-                                                        422sqm</a></h3>
-                                                <address>Ferris Park, Jersey City Land in Sales</address>
-                                            </div>
-                                            <div class="amenities clearfix">
-                                                <ul class="pull-left">
-                                                    <li><strong>Area:</strong> 450<sup>m2</sup></li>
-                                                </ul>
-                                                <ul class="pull-right">
-                                                    <li><i class="icons icon-bedroom"></i> 3</li>
-                                                    <li><i class="icons icon-bathroom"></i> 2</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 animation">
-                                    <div class="pgl-property">
-                                        <div class="property-thumb-info">
-                                            <div class="property-thumb-info-image">
-                                                <img alt="" class="img-responsive" src="images/properties/property-3.jpg">
-                                                <span class="property-thumb-info-label">
-                                                    <span class="label price">$358,000</span>
-                                                    <span class="label forrent">Rent</span>
-                                                </span>
-                                            </div>
-                                            <div class="property-thumb-info-content">
-                                                <h3><a href="property-detail.html">Poolside character home on a wide
-                                                        422sqm</a></h3>
-                                                <address>Ferris Park, Jersey City Land in Sales</address>
-                                            </div>
-                                            <div class="amenities clearfix">
-                                                <ul class="pull-left">
-                                                    <li><strong>Area:</strong> 450<sup>m2</sup></li>
-                                                </ul>
-                                                <ul class="pull-right">
-                                                    <li><i class="icons icon-bedroom"></i> 3</li>
-                                                    <li><i class="icons icon-bathroom"></i> 2</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 animation">
-                                    <div class="pgl-property">
-                                        <div class="property-thumb-info">
-                                            <div class="property-thumb-info-image">
-                                                <img alt="" class="img-responsive" src="images/properties/property-4.jpg">
-                                                <span class="property-thumb-info-label">
-                                                    <span class="label price">$358,000</span>
-                                                    <span class="label forrent">Rent</span>
-                                                </span>
-                                            </div>
-                                            <div class="property-thumb-info-content">
-                                                <h3><a href="property-detail.html">Poolside character home on a wide
-                                                        422sqm</a></h3>
-                                                <address>Ferris Park, Jersey City Land in Sales</address>
-                                            </div>
-                                            <div class="amenities clearfix">
-                                                <ul class="pull-left">
-                                                    <li><strong>Area:</strong> 450<sup>m2</sup></li>
-                                                </ul>
-                                                <ul class="pull-right">
-                                                    <li><i class="icons icon-bedroom"></i> 3</li>
-                                                    <li><i class="icons icon-bathroom"></i> 2</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
+
                             </div>
                         </div>
                     </section>
@@ -408,24 +329,52 @@
                     <aside class="block pgl-agents pgl-bg-light">
                         <h3>Thông tin người đăng</h3>
                             <div class="pgl-agent-item">
-                                <div class="img-thumbnail-medium">
-                                    <a href="agentprofile.html"><img src="images/agents/temp-agent.png"
-                                            class="img-responsive" alt=""></a>
-                                </div>
                                 <div class="pgl-agent-info">
                                     <h4><a href="agentprofile.html">{{ $property->account->user_info->name }}</a></h4>
                                     <address>
                                         <i class="fa fa-map-marker"></i> {{ $property->account->user_info->address }}<br>
                                         <i class="fa fa-phone"></i> Điện thoại: {{ $property->account->user_info->phone }}<br>
-                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-contact" style="margin-top: 10px" href="">Yêu cầu liên hệ lại</button>
+                                        <a style="height: 25px; padding: 2px 12px;"
+                                        class="btn btn-default btn-contact" href=""
+                                        data-url="{{ route('show-customer-contact', ['id_property' => $property->id]) }}"
+                                        ​> Yêu cầu liên hệ lại</a>
                                     </address>
                                 </div>
                             </div>
                     </aside>
+                    @if($property->property_type->name === 'Đấu giá')
+                    <aside class="block pgl-agents pgl-bg-light">
+                        <h3>Thông tin đấu giá</h3>
+                            <div class="pgl-agent-item">
+                                <div class="pgl-agent-info">
+                                    <p> <b>Giá khởi điểm:</b> {{ number_format($property->price) }} vnđ</p>
+                                    <address>
+                                        @if (isset($max_price))
+                                        <b>Giá cao nhất hiện tại:</b> {{ number_format($max_price->price) }} vnđ <br>
+                                        ({{ $max_price->auctioneer_profile->name }}) <br>
+                                        @else
+                                        <b>Giá cao nhất hiện tại:</b> {{ number_format($property->price) }}
+                                        @endif
+                                        <br>
+                                        <b>Ngày kết thúc</b> {{ date('d/m/Y', strtotime($property->end_date)) }}<br>
+                                        @if ($property->end_date >= $date)
+                                                    <a style="height: 25px; padding: 2px 12px;"
+                                                        class="btn btn-default btn-xs btn-send" href=""
+                                                        data-url="{{ route('show-auction-property', ['id_property' => $property->id]) }}"
+                                                        ​> Tham gia đấu giá</a>
+                                                @else
+                                                    Đã hết thời gian tham gia
+                                                @endif
+                                    </address>
+                                </div>
+                            </div>
+                    </aside>
+                    @endif
                     <!-- End Our Agents -->
                 </div>
             </div>
         </div>
+        @include('user.modal-auction')
         <!-- End content with sidebar -->
     </div>
 @endsection

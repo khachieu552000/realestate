@@ -55,16 +55,12 @@
                                         @foreach ($list_auctioneer as $list)
                                             <tr>
                                                 <td><span class="text-muted">{{ $index++ }}</span></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                {{-- <td class="text-end">
-                                                    <a href="{{ route('show-update-directions', ['id_directions'=>$item->id]) }}" class="btn btn-primary w-20">Sửa</a>
-                                                    <a href="{{ route('delete-directions', ['id_directions'=>$item->id]) }}" class="btn btn-primary w-20">Xoá</a>
-                                                </td> --}}
+                                                <td>{{ $list->property->name }}</td>
+                                                <td>{{ $list->auctioneer_profile->name }}</td>
+                                                <td>{{ $list->auctioneer_profile->citizen_identification }}</td>
+                                                <td>{{ $list->auctioneer_profile->address }}</td>
+                                                <td>{{ $list->auctioneer_profile->phone }}</td>
+                                                <td>{{ number_format($list->price) }} VNĐ</td>
                                             </tr>
                                         @endforeach
                                     @endif

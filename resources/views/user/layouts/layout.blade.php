@@ -53,7 +53,7 @@
         @yield('content')
 		<!-- End Main -->
         @include('user.layouts.footer')
-        @extends('user.modal-contact')
+        @include('user.modal-contact')
 
 	</div>
 
@@ -95,6 +95,26 @@
             })
         })
     </script>
+
+<script>
+    $('.btn-contact').click(function(e) {
+        var url = $(this).attr('data-url');
+
+        $('#modal-contact').modal('show');
+        e.preventDefault();
+        $.ajax({
+            url: url,
+            type: 'get',
+
+            success: function(response) {
+                $('#form-contact').attr('action', '{{ asset('home/customer-contact/') }}/' + response.data.id)
+            },
+            error: function(error) {
+
+            }
+        })
+    })
+</script>
 </body>
 
 <!-- Mirrored from pixelgeeklab.com/html/realestast/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 16 Aug 2015 08:54:11 GMT -->

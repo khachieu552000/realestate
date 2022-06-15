@@ -13,7 +13,24 @@ class AuctioneerProfile extends Model
         'name', 'citizen_identification', 'phone', 'address',
     ];
 
-    public function auction_history(){
+    public function auction_history()
+    {
         return $this->hasMany(AuctionHistory::class, 'auctioneer_id');
+    }
+
+    public function createAuctionProfile($request, $property)
+    {
+        $auctioneer = new AuctioneerProfile();
+        $auctioneer->name = $request->name;
+        $auctioneer->citizen_identification = $request->citizen_identification;
+        $auctioneer->phone = $request->phone;
+        $auctioneer->address = $request->address;
+        $auctioneer->save();
+
+        $auction_history = new AuctionHistory();
+        $auction_history->price = $request->price;
+        $auction_history->property_id = $property->id;
+        $auction_history->auctioneer_id = $auctioneer->id;
+        $auction_history->save();
     }
 }

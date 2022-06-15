@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AuctioneerProfile;
+use App\Models\AuctionHistory;
+use App\Models\Customer;
+use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -15,10 +19,13 @@ class CustomerController extends Controller
     }
 
     public function listAuctioneer(){
-        return view('admin.customer.list-auctioneer');
+        $list_auctioneer = AuctionHistory::with('auctioneer_profile')->with('property')->get();
+        return view('admin.customer.list-auctioneer', compact('list_auctioneer'));
     }
 
     public function listCustomer(){
+        // $lis_customer = Property::with('customer');
+        // dd($lis_customer);
         return view('admin.customer.list-customer');
     }
 }
