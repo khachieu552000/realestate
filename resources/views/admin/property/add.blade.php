@@ -6,16 +6,21 @@
                 <div class="row row-cards">
                     <div class="col-12">
                         <div class="container mt-3">
+                            @if (session('message'))
+                                <div class="alert alert-success">
+                                    {{ session('message') }}
+                                </div>
+                            @endif
                             <form action="{{ route('add-property') }}" method="post" class="card"  enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-header">
                                     <h4 class="card-title">Thêm dự án</h4>
                                 </div>
-                                @if (session('message'))
+                                {{-- @if (session('message'))
                                 <div class="alert alert-success">
                                     {{ session('message') }}
                                 </div>
-                            @endif
+                            @endif --}}
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-xl-4">

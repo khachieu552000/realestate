@@ -21,7 +21,7 @@ class CreatePropertyTable extends Migration
             $table->text('image')->nullable();
             $table->text('description');
             $table->double('price');
-            $table->string('acreage');
+            $table->double('acreage');
             $table->bigInteger('floors')->nullable();
             $table->bigInteger('bedrooms')->nullable();
             $table->bigInteger('bathrooms')->nullable();

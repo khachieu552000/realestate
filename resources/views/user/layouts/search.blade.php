@@ -1,8 +1,8 @@
     <!-- Begin Advanced Search -->
     <section class="pgl-advanced-search pgl-bg-light">
         <div class="container">
-            <form name="advancedsearch">
-
+            <form action="{{ route('search') }}" method="get" name="advancedsearch">
+                @csrf
                 <div class="row">
                     <div class="col-xs-6 col-sm-3">
                         <div class="form-group">
@@ -45,10 +45,10 @@
                 <div class="row">
                     <div class="col-xs-6 col-sm-3">
                         <div class="form-group">
-                            <label class="sr-only" for="search-bedrooms">Danh mục</label>
-                            <select id="search-bedrooms" name="search-bedrooms" data-placeholder="Bedrooms"
+                            <label class="sr-only" for="search-category">Danh mục</label>
+                            <select id="search-category" name="category" data-placeholder="Category"
                                 class="chosen-select">
-                                <option selected="selected" value="Bedrooms">Danh mục</option>
+                                <option selected="selected" value="0">Danh mục</option>
                                 @foreach ($category as $cate)
                                 <option value="{{ $cate->id }}">{{ $cate->name }}</option>
                                 @endforeach
@@ -57,11 +57,11 @@
                     </div>
                     <div class="col-xs-6 col-sm-3">
                         <div class="form-group">
-                            <label class="sr-only" for="search-bathrooms">Hình thức</label>
-                            <select id="search-bathrooms" name="search-bathrooms" data-placeholder="Bathrooms"
+                            <label class="sr-only" for="search-property_type">Hình thức</label>
+                            <select id="search-property_type" name="property_type" data-placeholder="property_type"
                                 class="chosen-select">
-                                <option selected="selected" value="Bathrooms">Hình thức</option>
-                                @foreach ($property_type as $pt)
+                                <option selected="selected" value="0">Hình thức</option>
+                                @foreach ($property_type_all as $pt)
                                 <option value="{{ $pt->id }}">{{ $pt->name }}</option>
                                 @endforeach
                             </select>
@@ -71,37 +71,28 @@
                         <div class="form-group">
                             <div class="row pgl-narrow-row">
                                 <div class="col-xs-6">
-                                    <label class="sr-only" for="search-minprice">Diện tích</label>
-                                    <select id="search-minprice" name="search-minprice" data-placeholder="Price From"
+                                    <label class="sr-only" for="search-acreage">Diện tích</label>
+                                    <select id="search-acreage" name="acreage" data-placeholder="acreage"
                                         class="chosen-select">
-                                        <option selected="selected" value="Price From">Diện tích</option>
-                                        <option value="30"> <= 30 <sup>m2</sup></option>
-                                        <option value="31">30 - 50 <sup>m2</sup></option>
-                                        <option value="51">50 - 100 <sup>m2</sup></option>
-                                        <option value="101">100 - 150 <sup>m2</sup></option>
-                                        <option value="151">150 - 200 <sup>m2</sup></option>
-                                        <option value="201">200 - 250 <sup>m2</sup></option>
-                                        <option value="251">250 - 300 <sup>m2</sup></option>
-                                        <option value="301">300 - 500 <sup>m2</sup></option>
+                                        <option selected="selected" value="0">Diện tích</option>
+                                        <option value="100"><= 100 <sup>m2</sup></option>
+                                        <option value="101">100 - 200 <sup>m2</sup></option>
+                                        <option value="201">200 - 500 <sup>m2</sup></option>
                                         <option value="501">> 500 <sup>m2</sup></option>
 
                                     </select>
                                 </div>
                                 <div class="col-xs-6">
-                                    <label class="sr-only" for="search-maxprice">Mức giá</label>
-                                    <select id="search-maxprice" name="search-maxprice" data-placeholder="Price To"
+                                    <label class="sr-only" for="search-price">Mức giá</label>
+                                    <select id="search-price" name="price" data-placeholder="Price"
                                         class="chosen-select">
-                                        <option selected="selected" value="Price To">Mức giá</option>
-                                        <option value="500"> <= 500 triệu</option>
-                                        <option value="501">500 triệu - 1 tỷ</option>
-                                        <option value="1">1 - 2 tỷ</option>
-                                        <option value="2">2 - 3 tỷ</option>
-                                        <option value="3">3 - 5 tỷ</option>
-                                        <option value="5">5 - 7 tỷ</option>
-                                        <option value="7">7 - 10 tỷ</option>
-                                        <option value="10">10 - 20 tỷ</option>
-                                        <option value="20">20 - 30 tỷ</option>
-                                        <option value="30">> 30 tỷ</option>
+                                        <option selected="selected" value="0">Mức giá</option>
+                                        <option value="1000000000"><= 1 tỷ</option>
+                                        <option value="1000000001">1 - 3 tỷ</option>
+                                        <option value="3000000001">3 - 7 tỷ</option>
+                                        <option value="7000000001">7 - 10 tỷ</option>
+                                        <option value="10000000001">10 - 20 tỷ</option>
+                                        <option value="20000000001">> 20 tỷ</option>
                                     </select>
                                 </div>
                             </div>

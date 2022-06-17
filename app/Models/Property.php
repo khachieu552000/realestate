@@ -68,4 +68,15 @@ class Property extends Model
     public function customer(){
         return $this->belongsToMany(Customer::class, 'property_id');
     }
+
+    public function getProperty($date){
+        return Property::where('status', '!=', 'deactive')
+               ->where('end_date', '>=', $date);
+    }
+
+    public function propertyByCategory($id_category, $date){
+        return Property::where('categories_id', $id_category)
+                    ->where('status', '!=', 'deactive')
+                    ->where('end_date', '>=', $date);
+    }
 }

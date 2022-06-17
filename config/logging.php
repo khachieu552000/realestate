@@ -48,6 +48,20 @@ return [
     */
 
     'channels' => [
+        'user' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/user.log'),
+            'level' => 'debug',
+            'day' => 7,
+        ],
+
+        'admin' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/admin.log'),
+            'level' => 'debug',
+            'day' => 7,
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],

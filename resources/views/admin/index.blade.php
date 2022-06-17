@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">Sales</div>
+                                <div class="subheader">Slide</div>
                                 <div class="ms-auto lh-1">
                                     <div class="dropdown">
                                         <a class="dropdown-toggle text-muted" href="#"
@@ -67,7 +67,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">Revenue</div>
+                                <div class="subheader">Tin Tức</div>
                                 <div class="ms-auto lh-1">
                                     <div class="dropdown">
                                         <a class="dropdown-toggle text-muted" href="#"
@@ -106,7 +106,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">New clients</div>
+                                <div class="subheader">Loại tin</div>
                                 <div class="ms-auto lh-1">
                                     <div class="dropdown">
                                         <a class="dropdown-toggle text-muted" href="#"
@@ -144,7 +144,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">Active users</div>
+                                <div class="subheader">Danh mục</div>
                                 <div class="ms-auto lh-1">
                                     <div class="dropdown">
                                         <a class="dropdown-toggle text-muted" href="#"
@@ -183,7 +183,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">Sales</div>
+                                <div class="subheader">Hình thức</div>
                                 <div class="ms-auto lh-1">
                                     <div class="dropdown">
                                         <a class="dropdown-toggle text-muted" href="#"
@@ -229,7 +229,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">Revenue</div>
+                                <div class="subheader">Hướng</div>
                                 <div class="ms-auto lh-1">
                                     <div class="dropdown">
                                         <a class="dropdown-toggle text-muted" href="#"
@@ -268,7 +268,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">New clients</div>
+                                <div class="subheader">Thành viên</div>
                                 <div class="ms-auto lh-1">
                                     <div class="dropdown">
                                         <a class="dropdown-toggle text-muted" href="#"
@@ -306,7 +306,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader">Active users</div>
+                                <div class="subheader">Hồ sơ đấu giá</div>
                                 <div class="ms-auto lh-1">
                                     <div class="dropdown">
                                         <a class="dropdown-toggle text-muted" href="#"

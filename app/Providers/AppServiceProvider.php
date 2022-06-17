@@ -30,12 +30,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         view()->Composer('user.layouts.header', function($view){
             $category = Category::all();
-            // $property_type = PropertyType::where('status',self::LOCK_STATUS)->get();
             $view->with('category',$category);
         });
         view()->Composer('user.layouts.header', function($view){
-            // $category = Category::all();
-            $property_type = PropertyType::where('status',self::LOCK_STATUS)->get();
+            $property_type = PropertyType::where('status',self::LOCK_STATUS)->limit(1)->get();
             $view->with('property_type',$property_type);
         });
     }

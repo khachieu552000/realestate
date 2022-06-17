@@ -12,19 +12,19 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="">Họ tên <span style="color: red">*</span></label>
-                    <input class="form-control" name="name" id="" require>
+                    <input type="text" class="form-control" name="name" id="" require>
                 </div>
                 <div class="form-group">
                     <label for="">CMND/CCCD<span style="color: red">*</span></label>
-                    <input class="form-control" name="citizen_identification" id="" require>
+                    <input type="number" class="form-control" name="citizen_identification" id="" require>
                 </div>
                 <div class="form-group">
                     <label for="">Điện thoại<span style="color: red">*</span></label>
-                    <input class="form-control" name="phone" id="" require>
+                    <input type="number" class="form-control" name="phone" id="" require>
                 </div>
                 <div class="form-group">
                     <label for="">Địa chỉ<span style="color: red">*</span></label>
-                    <input class="form-control" name="address" id="" require>
+                    <input type="text" class="form-control" name="address" id="" require>
                 </div>
                 <div class="form-group">
                     <label for="">Số tiền <span style="color: red">*</span></label>

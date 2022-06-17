@@ -14,7 +14,6 @@ use App\Http\Controllers\Web\Admin\PropertyController;
 use App\Http\Controllers\Web\Admin\PropertyTypeController;
 use App\Http\Controllers\Web\Admin\SlideController;
 use App\Http\Controllers\Web\User\PageController;
-use App\Http\Controllers\Web\User\SearchController;
 // use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 // use phpDocumentor\Reflection\Location;
@@ -49,7 +48,7 @@ Route::prefix('home')->group(function () {
 
     Route::get('/customer-contact/{id_property}', [PageController::class, 'showCustomerContact'])->name('show-customer-contact');
     Route::post('/customer-contact/{id_property}', [PageController::class, 'customerContact'])->name('customer-contact');
-    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/search', [PageController::class, 'search'])->name('search');
 });
 /**
  * Admin

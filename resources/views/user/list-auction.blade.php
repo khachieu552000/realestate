@@ -24,6 +24,13 @@
                 @if (session('message'))
                 <div class="alert alert-success">{{ session('message') }}</div>
                 @endif
+                @if (count($errors)>0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $err)
+                    {{ $err }} <br>
+                    @endforeach
+                </div>
+                @endif
                     <div class="properties-full properties-listing properties-listfull">
                         @foreach ($property as $item)
                             <div class="pgl-property animation">
@@ -59,10 +66,11 @@
                                             </div>
                                             <div class="amenities clearfix">
                                                 <ul>
-                                                    @if (isset($max_price))
-                                                    <li><strong>Giá cao nhất: </strong>
-                                                        {{ number_format($max_price->price) }} vnđ</li>
-                                                        <li>({{ $max_price->auctioneer_profile->name }})</li>
+
+                                                    @if (isset($arr_max[$item->id][0]))
+                                                        <li><strong>Giá cao nhất: </strong>
+                                                        {{ number_format($arr_max[$item->id][0]->price) }} vnđ</li>
+                                                        <li>({{$arr_max[$item->id][0]->auctioneer_profile->name }})</li>
                                                     @else
                                                     <li><strong>Giá cao nhất: </strong> {{ number_format($item->price) }} vnđ</li>
                                                     @endif
