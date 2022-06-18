@@ -31,13 +31,12 @@
                             <div class="alert alert-success">{{ session('message') }}</div>
                         @endif
                         <div class="table-responsive">
-                            <table class="table card-table table-vcenter text-nowrap datatable table-bordered" id="table-admin">
+                            <table class="table card-table table-vcenter text-wrap datatable table-bordered" id="table-admin">
                                 <thead>
                                     <tr>
                                         <th class="w-1">STT</th>
                                         <th>Tiêu đề</th>
                                         <th>Hình ảnh</th>
-                                        <th>Nội dung</th>
                                         <th>Ngày đăng</th>
                                         <th class="w-1">#</th>
                                     </tr>
@@ -54,7 +53,6 @@
                                                 <td>
                                                     <img src="{{ asset($item->image) }}" height="150" width="300" alt="">
                                                 </td>
-                                                <td>{!! $item->content !!}</td>
                                                 <td>{{ $item->created_at }}</td>
                                                 <td class="text-end">
                                                     <a href="{{ route('show-update-news', ['id_news' => $item->id]) }}"

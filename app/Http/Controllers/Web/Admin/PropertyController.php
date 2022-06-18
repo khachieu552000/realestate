@@ -110,7 +110,7 @@ class PropertyController extends Controller
         $image = $property;
         $path = "images/property/";
         $this->upload($image, $request, $path);
-        $property->save();
+        $property->update();
         return redirect()->route('list-property')->with('message', 'Cập nhật thành công');
     }
 

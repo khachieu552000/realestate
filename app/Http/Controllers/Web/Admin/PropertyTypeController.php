@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Property;
 use App\Models\PropertyType;
 use Illuminate\Http\Request;
 
@@ -37,6 +38,10 @@ class PropertyTypeController extends Controller
 
     public function delete($id_property_type)
     {
+        $property = Property::where('property_type_id', $id_property_type)->first();
+        if(!isset($property)){
+            return redirect()->back()->with('error', 'Không thể xoá loại hình');
+        }
         PropertyType::destroy($id_property_type);
         return redirect()->back()->with('message', 'Đã xoá loại hình');
     }

@@ -33,7 +33,7 @@ class AuthController extends Controller
         if ($data > 0) {
             Account::register($data);
             Mail::send('user.active-account', compact('data'), function ($email) use ($data) {
-                $email->subject('RealEstate');
+                $email->from($data['email'],'RealEstate')->subject('Kích hoạt tài khoản');
                 $email->to($data['email'], $data['name']);
             });
         }

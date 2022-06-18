@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -40,6 +41,10 @@ class CategoryController extends Controller
 
     public function delete($id_category)
     {
+        $property = Property::where('categories_id', $id_category)->first();
+        if(!empty($property)){
+            return redirect()->back()->with('error','Danh mục có tồn tại bất động sản. Không thể xoá');
+        }
         Category::destroy($id_category);
         return redirect()->back()->with('message', 'Đã xoá danh mục');
     }

@@ -13,6 +13,8 @@ use App\Models\Provinces;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Web\User\SearchTrait;
+use App\Models\News;
+use App\Models\Slide;
 use Illuminate\Support\Facades\Log;
 class PageController extends Controller
 {
@@ -23,6 +25,7 @@ class PageController extends Controller
         $category = Category::all();
         $property_type_all = PropertyType::all();
 
+        $slide = Slide::all();
         $date = Carbon::now()->toDateString();
         $property_type = PropertyType::where('status', 1)->first();
         if (!empty($property_type)) {
@@ -31,7 +34,7 @@ class PageController extends Controller
                 ->paginate(5, ['*'], 'pag');
             return view(
                 'user.index',
-                compact('property', 'provinces', 'category', 'property_type', 'property_type_all')
+                compact('property', 'provinces', 'category', 'property_type', 'property_type_all', 'slide')
             );
         } else {
             $property = Property::getProperty($date)->paginate(5, ['*'], 'pag');
@@ -140,14 +143,9 @@ class PageController extends Controller
         $history = AuctionHistory::with('auctioneer_profile')->where('property_id', $id_property)->get();
         if(isset($history[0])){
             for ($i = 0; $i <= count($history); $i++) {
-                // dd($history[0]->auctioneer_profile);
                 if (strcmp($history[$i]->auctioneer_profile->citizen_identification, $request->citizen_identification) === 0) {
-                    // $auctioneer = AuctioneerProfile::where('citizen_identification', $request->citizen_identification)->get();
-                    // for($j = 0; $j < count($auctioneer); $j++){
-                        // $auction_history = AuctionHistory::where('auctioneer_id', $auctioneer[$j]->id)->where('property_id', $id_property)->first();
                         $history[$i]->price = $request->price;
                         $history[$i]->update();
-                    // }
                     return redirect()->back()->with('message', 'Bạn đã thay đổi mức giá của mình');
                 }
                 else {
@@ -163,50 +161,13 @@ class PageController extends Controller
             return redirect()->back()->with('message', 'Chúc mừng bạn đã tham gia đấu giá đấu giá thành công');
         }
     }
-        // // $property = Property::find($id_property);
-        // // $history = AuctionHistory::all();
-        // dd($history);
-    //     if(isset($history[0])){
-    //         for ($i = 0; $i <= count($history); $i++) {
-    //             if ($property->id === $history[$i]->property_id) {
-    //                 // dd($history[$i]);
-    //                 $auctioneer_history = AuctionHistory::with('auctioneer_profile')->where('property_id', $id_property)->get();
-    //                 if (isset($auctioneer_history)) {
-    //                     foreach ($auctioneer_history as $item) {
-    //                         if (strcmp($item->auctioneer_profile->citizen_identification, $request->citizen_identification) === 0) {
-    //                             $auctioneer = AuctioneerProfile::where('citizen_identification', $request->citizen_identification)->first();
-    //                             $auction_history = AuctionHistory::where('auctioneer_id', $auctioneer->id)->where('property_id', $id_property)->first();
-    //                             $auction_history->price = $request->price;
-    //                             $auction_history->update();
-    //                             return redirect()->back()->with('message', 'Bạn đã thay đổi mức giá của mình');
-    //                         } else {
-    //                             $property = Property::find($id_property);
-    //                             AuctioneerProfile::createAuctionProfile($request, $property);
-    //                             return redirect()->back()->with('message', 'Chúc mừng bạn đã tham gia đấu giá đấu giá thành công');
-    //                         }
-    //                     }
-    //                 } else {
-    //                     $property = Property::find($id_property);
-    //                     AuctioneerProfile::createAuctionProfile($request, $property);
-    //                     return redirect()->back()->with('message', 'Chúc mừng bạn đã tham gia đấu giá đấu giá thành công');
-    //                 }
-    //             } else {
-    //                 $property = Property::find($id_property);
-    //                 AuctioneerProfile::createAuctionProfile($request, $property);
-    //                 return redirect()->back()->with('message', 'Chúc mừng bạn đã tham gia đấu giá đấu giá thành công');
-    //             }
-    //         }
-    //     }
-    //     else{
-    //         $property = Property::find($id_property);
-    //             AuctioneerProfile::createAuctionProfile($request, $property);
-    //             return redirect()->back()->with('message', 'Chúc mừng bạn đã tham gia đấu giá đấu giá thành công');
-    //     }
-    // }
 
 
     public function showPropertyDetail($id_property)
     {
+        $provinces = Provinces::all();
+        $category = Category::all();
+        $property_type_all = PropertyType::all();
         $date = Carbon::now()->toDateString();
         $property = Property::find($id_property);
         $similar_property = Property::where('property_type_id', $property->property_type_id)->get();
@@ -217,7 +178,7 @@ class PageController extends Controller
             ->first();
         return view(
             'user.property-detail',
-            compact('property', 'max_price', 'date', 'similar_property')
+            compact('property', 'max_price', 'date', 'similar_property', 'provinces', 'category', 'property_type_all')
         );
     }
 
@@ -263,5 +224,15 @@ class PageController extends Controller
         $keyword = $this->searchs($request);
         log::channel('user')->info($keyword);
         return view('user.list-property-search', compact('keyword', 'provinces','category', 'property_type_all'));
+    }
+
+    public function listNews(){
+        $news = News::all();
+        return view('user.news.list-news', compact('news'));
+    }
+
+    public function newsDetail($id_news){
+        $news_detail = News::find($id_news);
+        return view('user.news.news-detail', compact('news_detail'));
     }
 }

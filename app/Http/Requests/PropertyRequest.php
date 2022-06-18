@@ -35,9 +35,6 @@ class PropertyRequest extends FormRequest
             'direction' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            // 'floors' => 'numeric|min:0',
-            // 'bedrooms' => 'numeric|min:0',
-            // 'bathrooms' => 'numeric|min:0',
         ];
     }
 
@@ -65,12 +62,6 @@ class PropertyRequest extends FormRequest
             'direction.required' => 'Bạn chưa chọn hướng',
             'start_date.required' => 'Bạn chưa nhập ngày bắt đầu',
             'end_date.required' => 'Bạn chưa nhập ngày kết thúc',
-            // 'floors.numeric' => 'Nhập số tầng không hợp lệ',
-            // 'floors.min' => 'Nhập số tầng phải không âm',
-            // 'bedrooms.numeric' => 'Nhập số phòng ngủ không hợp lệ',
-            // 'bedrooms.min' => 'Số lượng phòng ngủ không được âm',
-            // 'bathrooms.numeric' => 'Nhập số phòng tắm không hợp lệ',
-            // 'bathrooms.min' => 'Số lượng phòng tắm không được âm',
         ];
     }
 }

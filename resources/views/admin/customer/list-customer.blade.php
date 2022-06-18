@@ -23,38 +23,30 @@
             <div class="container-xxl">
                 <div class="col-12">
                     <div class="card">
-                        {{-- <div class="card-header">
-                            <div class="card-body py-1">
-                                <div class="d-flex">
-                                    <div class="text-muted">
-                                        <a href="" class="btn btn-primary w-100">Thêm
-                                            mới</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="table-responsive">
                             <table class="table card-table table-vcenter text-nowrap datatable table-bordered" id="table-admin">
                                 <thead>
                                     <tr>
                                         <th class="w-1">STT</th>
                                         <th>Tên</th>
+                                        <th>email</th>
+                                        <th>Điện thoại</th>
+                                        <th>Message</th>
                                         <th class="w-1">#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($directions))
+                                    @if (isset($lis_customer))
                                         @php
                                             $index = 1;
                                         @endphp
-                                        @foreach ($directions as $item)
+                                        @foreach ($lis_customer as $item)
                                             <tr>
                                                 <td><span class="text-muted">{{ $index++ }}</span></td>
                                                 <td>{{ $item->name }}</td>
-                                                <td class="text-end">
-                                                    <a href="{{ route('show-update-directions', ['id_directions'=>$item->id]) }}" class="btn btn-primary w-20">Sửa</a>
-                                                    <a href="{{ route('delete-directions', ['id_directions'=>$item->id]) }}" class="btn btn-primary w-20">Xoá</a>
-                                                </td>
+                                                <td>{{ $item->email }}</td>
+                                                <td>{{ $item->phone }}</td>
+                                                <td>{{ $item->message }}</td>
                                             </tr>
                                         @endforeach
                                     @endif

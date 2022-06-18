@@ -24,8 +24,7 @@ class CustomerController extends Controller
     }
 
     public function listCustomer(){
-        // $lis_customer = Property::with('customer');
-        // dd($lis_customer);
-        return view('admin.customer.list-customer');
+        $list_customer = Customer::all();
+        return view('admin.customer.list-customer', compact('list_customer'));
     }
 }

@@ -13,6 +13,7 @@
     <link href="{{ asset('frontend/dist/css/tabler-payments.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/dist/css/demo.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/users/css/fonts/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
 
     {{-- <link href="{{ asset('dataTables/css/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('dataTables/css/dataTables/dataTables.responsive.css') }}" rel="stylesheet"> --}}

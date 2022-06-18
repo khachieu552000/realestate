@@ -49,6 +49,8 @@ Route::prefix('home')->group(function () {
     Route::get('/customer-contact/{id_property}', [PageController::class, 'showCustomerContact'])->name('show-customer-contact');
     Route::post('/customer-contact/{id_property}', [PageController::class, 'customerContact'])->name('customer-contact');
     Route::get('/search', [PageController::class, 'search'])->name('search');
+    Route::get('/list-new', [PageController::class, 'listNews'])->name('list-news');
+    Route::get('/news-detail/{id_news}', [PageController::class, 'newsDetail'])->name('new-detail');
 });
 /**
  * Admin

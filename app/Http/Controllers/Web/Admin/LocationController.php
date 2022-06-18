@@ -291,18 +291,12 @@ class LocationController extends Controller
         return Excel::download(new LocationExport(), 'location.xlsx');
     }
 
-    /**
-     * In Progress
-     */
-
     public function importLocation(Request $request)
     {
         $this->validate($request, [
             'file_location' => 'required',
         ]);
-        // $path = $request->file('file_location')->getRealPath();
-        // dd($request->file_location);
         Excel::import(new LocationImport, $request->file('file_location'));
-        return redirect()->back()->with('message', 'success');
+        return redirect()->back()->with('message', 'Thành công');
     }
 }

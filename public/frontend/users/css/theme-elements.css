@@ -615,6 +615,11 @@ hr {
   margin: 0;
 }
 
+.text-overflow{
+    height: 50px;
+    overflow: hidden;
+}
+
 /* line 495, ../sass/theme-elements.scss */
 .amenities {
   border-top: 1px solid #eee;

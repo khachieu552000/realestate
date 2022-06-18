@@ -55,7 +55,11 @@ class PostTypeController extends Controller
     }
 
     public function deletePostType($id_post_type){
+        $property = Property::where('post_type_id', $id_post_type)->first();
         $post_type = PostType::find($id_post_type);
+        if(!empty($id_post_type)){
+            return redirect()->back()->with('error', 'Không thể xoá');
+        }
         $post_type->delete();
         return redirect()->back()->with('message','Đã xoá thành công');
     }

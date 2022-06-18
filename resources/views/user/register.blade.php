@@ -31,7 +31,7 @@
                         </div>
                     @endif
                     <div class="mb-3">
-                        <label class="form-label">Họ tên</label>
+                        <label class="form-label required">Họ tên</label>
                         <input type="text" class="form-control" name="name" placeholder="Nhập họ tên"
                             value="{{ old('name') }}">
                         @error('name')
@@ -39,7 +39,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
+                        <label class="form-label required">Email</label>
                         <input type="email" class="form-control" name="email" placeholder="Nhập email"
                             value="{{ old('email') }}">
                         @error('email')
@@ -47,7 +47,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Giới tính</label>
+                        <label class="form-label required">Giới tính</label>
                         <select class="form-control" name="gender">
                             <option value="">Chọn giới tính</option>
                             <option value="Nam">Nam</option>
@@ -58,7 +58,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Ngày sinh</label>
+                        <label class="form-label required">Ngày sinh</label>
                         <input type="date" class="form-control" name="birthday" placeholder="Nhập ngày sinh"
                             value="{{ old('birthday') }}">
                         @error('birthday')
@@ -66,7 +66,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Địa chỉ</label>
+                        <label class="form-label required">Địa chỉ</label>
                         <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ"
                             value="{{ old('address') }}">
                         @error('address')
@@ -74,7 +74,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Điện thoại</label>
+                        <label class="form-label required">Điện thoại</label>
                         <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại"
                             value="{{ old('phone') }}">
                         @error('phone')
@@ -82,7 +82,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Mật khẩu</label>
+                        <label class="form-label required">Mật khẩu</label>
                         <div class="input-group input-group-flat">
                             <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu"
                                 value="{{ old('password') }}" autocomplete="off">
@@ -103,13 +103,6 @@
                         @error('password')
                             <p style="color: red">{{ $message }}</p>
                         @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-check">
-                            <input type="checkbox" class="form-check-input" />
-                            <span class="form-check-label">Đồng ý các <a href="./terms-of-service.html"
-                                    tabindex="-1">điều khoản và chính sách</a>.</span>
-                        </label>
                     </div>
                     <div class="form-footer">
                         <button type="submit" class="btn btn-primary w-100">Đăng ký</button>

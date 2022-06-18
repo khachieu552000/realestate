@@ -42,7 +42,11 @@
                                                     <select name="property_type" class="form-control">
                                                         <option value="">Chọn danh loại hình</option>
                                                         @foreach ($property_type_user as $pt_user)
-                                                        <option value="{{ $pt_user->id }}">{{ $pt_user->name }}</option>
+                                                        <option
+                                                        @if ($pt_user->id === $property->property_type_id)
+                                                        selected
+                                                        @endif
+                                                        value="{{ $pt_user->id }}">{{ $pt_user->name }}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('property_type')
@@ -55,7 +59,11 @@
                                                     <select name="property_type" class="form-control">
                                                         <option value="">Chọn danh loại hình</option>
                                                         @foreach ($property_type as $pt)
-                                                        <option value="{{ $pt->id }}">{{ $pt->name }}</option>
+                                                        <option
+                                                        @if ($pt->id === $property->property_type_id)
+                                                        selected
+                                                        @endif
+                                                        value="{{ $pt->id }}">{{ $pt->name }}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('property_type')
@@ -186,7 +194,7 @@
                                                     <div class="row">
                                                         <div class="mb-3">
                                                             <label class="form-label required">Loại bài đăng</label>
-                                                            <select class="form-control" name="post_type" id="">
+                                                            <select class="form-control" name="post_type">
                                                                 <option value="">Chọn loại bài đăng</option>
                                                                 @foreach ($post_type as $post)
                                                                     <option

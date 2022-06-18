@@ -17,8 +17,9 @@
 
     <section class="pgl-properties pgl-bg-grey">
         <div class="container">
-            <h2>Danh sách</h2>
+            <h2>Bất động sản</h2>
             <div class="properties-full properties-listing properties-listfull">
+                @if(isset($keyword[0]))
                 @foreach ($keyword as $item)
                 <div class="pgl-property animation">
                     <div class="row">
@@ -61,6 +62,9 @@
                     </div>
                 </div>
                 @endforeach
+                @else
+                <div>Không có bất động sản nào phù hợp</div>
+                @endif
                 {{-- <ul class="pagination">
                     <div>{{ $property->links() }}</div>
                </ul> --}}

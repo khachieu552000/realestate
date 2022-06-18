@@ -3,6 +3,7 @@
         <div class="container">
             <p class="pull-left text-note hidden-xs"><i class="fa fa-phone"></i> Hotline: 0378 642 530</p>
             <ul class="nav nav-pills nav-top navbar-right">
+                <li><a href="{{ route('list-news') }}">Tin tức</a></li>
                 <li><a href="{{ route('login') }}">Đăng Bài</a></li>
             </ul>
         </div>

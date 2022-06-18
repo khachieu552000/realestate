@@ -19,6 +19,7 @@
         <div class="container">
             <h2>{{ $category_find_id->name }}</h2>
             <div class="properties-full properties-listing properties-listfull">
+                @if (isset($property[0]))
                 @foreach ($property as $item)
                 <div class="pgl-property animation">
                     <div class="row">
@@ -61,6 +62,9 @@
                     </div>
                 </div>
                 @endforeach
+                @else
+                <div>Không có bất động sản nào</div>
+                @endif
                 <ul class="pagination">
                     <div>{{ $property->links() }}</div>
                </ul>
